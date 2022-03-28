@@ -4,4 +4,7 @@
    <FileRef
       location = "group:ARCameraDemo/ARCameraDemo.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:../../UnityProjects/ARCamera/Builds/iOS/Unity-iPhone.xcodeproj">
+   </FileRef>
 </Workspace>
