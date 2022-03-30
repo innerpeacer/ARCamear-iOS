@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57342C5C27F4618E00EBFFD9 /* WTUnitySDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 57342C5B27F4618E00EBFFD9 /* WTUnitySDK.mm */; };
+		57342C5F27F47A5000EBFFD9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57342C5E27F47A5000EBFFD9 /* main.m */; };
 		578D275527F14E1300B57BB8 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 578D275427F14E1300B57BB8 /* AppDelegate.mm */; };
 		578D275E27F14E1300B57BB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 578D275C27F14E1300B57BB8 /* Main.storyboard */; };
 		578D276027F14E1500B57BB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578D275F27F14E1500B57BB8 /* Assets.xcassets */; };
@@ -44,6 +46,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		57342C5A27F4618E00EBFFD9 /* WTUnitySDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTUnitySDK.h; sourceTree = "<group>"; };
+		57342C5B27F4618E00EBFFD9 /* WTUnitySDK.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WTUnitySDK.mm; sourceTree = "<group>"; };
+		57342C5D27F463DA00EBFFD9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		57342C5E27F47A5000EBFFD9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		578D275027F14E1300B57BB8 /* ARCameraDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARCameraDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		578D275327F14E1300B57BB8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		578D275427F14E1300B57BB8 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -76,6 +82,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57342C5927F4617700EBFFD9 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				57342C5A27F4618E00EBFFD9 /* WTUnitySDK.h */,
+				57342C5B27F4618E00EBFFD9 /* WTUnitySDK.mm */,
+			);
+			path = SDK;
+			sourceTree = "<group>";
+		};
 		578D274727F14E1300B57BB8 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +111,7 @@
 		578D275227F14E1300B57BB8 /* ARCameraDemo */ = {
 			isa = PBXGroup;
 			children = (
+				57342C5927F4617700EBFFD9 /* SDK */,
 				578D279F27F1995000B57BB8 /* Controllers */,
 				578D279D27F1944800B57BB8 /* MainViewController.mm */,
 				578D275327F14E1300B57BB8 /* AppDelegate.h */,
@@ -104,6 +120,8 @@
 				578D275F27F14E1500B57BB8 /* Assets.xcassets */,
 				578D276127F14E1500B57BB8 /* LaunchScreen.storyboard */,
 				578D276427F14E1500B57BB8 /* Info.plist */,
+				57342C5D27F463DA00EBFFD9 /* PrefixHeader.pch */,
+				57342C5E27F47A5000EBFFD9 /* main.m */,
 			);
 			path = ARCameraDemo;
 			sourceTree = "<group>";
@@ -206,6 +224,8 @@
 			files = (
 				578D275527F14E1300B57BB8 /* AppDelegate.mm in Sources */,
 				578D279E27F1944800B57BB8 /* MainViewController.mm in Sources */,
+				57342C5F27F47A5000EBFFD9 /* main.m in Sources */,
+				57342C5C27F4618E00EBFFD9 /* WTUnitySDK.mm in Sources */,
 				578D27A227F1997000B57BB8 /* MenuViewController.m in Sources */,
 				578D27A527F1B39E00B57BB8 /* UnityAppTestViewController.mm in Sources */,
 			);
@@ -268,12 +288,14 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "/Users/innerpeacer/iOS-ws/ARCamera-iOS/ARCameraDemo/ARCameraDemo/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -284,10 +306,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				WARNING_CFLAGS = (
+					"-Wno-quoted-include-in-framework-header",
+					"-Wno-deprecated-declarations",
+				);
 			};
 			name = Debug;
 		};
@@ -326,20 +353,27 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "/Users/innerpeacer/iOS-ws/ARCamera-iOS/ARCameraDemo/ARCameraDemo/PrefixHeader.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				WARNING_CFLAGS = (
+					"-Wno-quoted-include-in-framework-header",
+					"-Wno-deprecated-declarations",
+				);
 			};
 			name = Release;
 		};
@@ -369,6 +403,10 @@
 				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;
+				WARNING_CFLAGS = (
+					"-Wno-quoted-include-in-framework-header",
+					"-Wno-deprecated-declarations",
+				);
 			};
 			name = Debug;
 		};
@@ -398,6 +436,10 @@
 				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = 1;
+				WARNING_CFLAGS = (
+					"-Wno-quoted-include-in-framework-header",
+					"-Wno-deprecated-declarations",
+				);
 			};
 			name = Release;
 		};

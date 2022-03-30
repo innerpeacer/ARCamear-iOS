@@ -29,11 +29,30 @@
     [self initButtons];
 }
 
-- (IBAction)btnInitializeUnityClicked:(id)sender
+- (void)btnInitializeUnityClicked:(id)sender
 {
     NSLog(@"initializeUnityButton clicked!");
     UnityAppTestViewController *controller = [[UnityAppTestViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:NO];    
+//    [self.navigationController pushViewController:controller animated:NO];
+    [self presentModalViewController:controller animated:YES];
+}
+
+- (void)btnShowUnityWindowClicked:(id)sender
+{
+    NSLog(@"showUnityButton clicked!");
+//    [[WTUnitySDK sharedSDK] showUnityWindow];
+}
+
+- (void)btnUnloadUnityClicked:(id)sender
+{
+    NSLog(@"unloadUnityButton clicked!");
+    [[WTUnitySDK sharedSDK] unloadUnity];
+}
+
+- (void)btnQuitUnityClicked:(id)sender
+{
+    NSLog(@"quitUnityButton clicked!");
+    [[WTUnitySDK sharedSDK] quitUnity];
 }
 
 - (void)initButtons {
@@ -53,7 +72,7 @@
         self.showUnityButton.frame = CGRectMake(0, 0, 150, 44);
         self.showUnityButton.center = CGPointMake(100, 170);
         self.showUnityButton.backgroundColor = [UIColor lightGrayColor];
-//    self.showUnityButton  addTarget: action: forControlEvents:
+        [self.showUnityButton addTarget:self action:@selector(btnShowUnityWindowClicked:) forControlEvents:UIControlEventPrimaryActionTriggered];
         [self.view addSubview:self.showUnityButton];
     }
 
@@ -63,7 +82,7 @@
         self.unloadUnityButton.frame = CGRectMake(0, 0, 150, 44);
         self.unloadUnityButton.center = CGPointMake(300, 120);
         self.unloadUnityButton.backgroundColor = [UIColor redColor];
-        //    self.unloadUnityButton  addTarget: action: forControlEvents:
+        [self.unloadUnityButton  addTarget:self action:@selector(btnUnloadUnityClicked:) forControlEvents:UIControlEventPrimaryActionTriggered];
         [self.view addSubview:self.unloadUnityButton];
     }
 
@@ -73,7 +92,7 @@
         self.quitUnityButton.frame = CGRectMake(0, 0, 150, 44);
         self.quitUnityButton.center = CGPointMake(300, 170);
         self.quitUnityButton.backgroundColor = [UIColor redColor];
-        //    self.quitUnityButton  addTarget: action: forControlEvents:
+        [self.quitUnityButton addTarget:self action:@selector(btnQuitUnityClicked:) forControlEvents:UIControlEventPrimaryActionTriggered];
         [self.view addSubview:self.quitUnityButton];
     }
 }

@@ -112,30 +112,6 @@
 //    return YES;
 //}
 //
-//- (void)initUnity {
-//    if ([self unityIsInitialized]) {
-//        showAlert(@"Unity already initialized", @"Unload Unity first");
-//        return;
-//    }
-//    if ([self didQuit]) {
-//        showAlert(@"Unity cannot be initialized after quit", @"Use unload instead");
-//        return;
-//    }
-//
-//    [self setUfw:UnityFrameworkLoad()];
-//    // Set UnityFramework target for Unity-iPhone/Data folder to make Data part of a UnityFramework.framework and uncomment call to setDataBundleId
-//    // ODR is not supported in this case, ( if you need embedded and ODR you need to copy data )
-//    [[self ufw] setDataBundleId:"com.unity3d.framework"];
-//    [[self ufw] registerFrameworkListener:self];
-//    [NSClassFromString(@"FrameworkLibAPI") registerAPIforNativeCalls:self];
-//
-//    [[self ufw] runEmbeddedWithArgc:gArgc argv:gArgv appLaunchOpts:appLaunchOpts];
-//
-//    // set quit handler to change default behavior of exit app
-//    [[self ufw] appController].quitHandler = ^() {
-//        NSLog(@"AppController.quitHandler called");
-//    };
-//
 //    auto view = [[[self ufw] appController] rootView];
 //
 //    if (self.showUnityOffButton == nil) {
@@ -160,23 +136,6 @@
 //    } else {
 //        [UnityFrameworkLoad() quitApplication:0];
 //    }
-//}
-//
-//- (void)unityDidUnload:(NSNotification *)notification {
-//    NSLog(@"unityDidUnload called");
-//
-//    [[self ufw] unregisterFrameworkListener:self];
-//    [self setUfw:nil];
-//    [self showHostMainWindow:@""];
-//}
-//
-//- (void)unityDidQuit:(NSNotification *)notification {
-//    NSLog(@"unityDidQuit called");
-//
-//    [[self ufw] unregisterFrameworkListener:self];
-//    [self setUfw:nil];
-//    [self setDidQuit:true];
-//    [self showHostMainWindow:@""];
 //}
 //
 //
