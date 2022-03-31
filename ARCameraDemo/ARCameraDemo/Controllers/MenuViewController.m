@@ -8,6 +8,7 @@
 #import "MenuViewController.h"
 #import "TestUnityViewController.h"
 #import "AppDelegate.h"
+#import "WTUnitySDK.h"
 
 @interface MenuViewController () <WTUnityViewControllerDelegate>
 

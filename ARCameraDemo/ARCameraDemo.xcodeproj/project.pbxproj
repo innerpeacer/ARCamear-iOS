@@ -82,17 +82,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5711602527F5483B0054822C /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
 		57342C5927F4617700EBFFD9 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				5711602527F5483B0054822C /* ViewControllers */,
 				57342C5A27F4618E00EBFFD9 /* WTUnitySDK.h */,
 				57342C5B27F4618E00EBFFD9 /* WTUnitySDK.mm */,
 			);
