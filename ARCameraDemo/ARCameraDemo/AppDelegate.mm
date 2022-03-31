@@ -19,12 +19,4 @@
     return YES;
 }
 
-- (void)showMainView {
-//    if (![self unityInitialized]) {
-//        ShowAlert(@"Unity Is Not Initialized!", @"Initialize Unity first.");
-//    } else {
-//        [[self ufw] showUnityWindow];
-//    }
-}
-
 @end

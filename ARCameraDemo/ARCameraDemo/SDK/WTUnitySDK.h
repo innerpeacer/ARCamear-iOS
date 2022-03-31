@@ -8,24 +8,33 @@
 #import <Foundation/Foundation.h>
 #import <UnityFramework/UnityFramework.h>
 
+@protocol WTUnityOverlayViewDelegate <NSObject>
+
+@optional
+- (UIView *)viewToOverlayInUnity;
+
+@end
+
+@protocol WTUnityViewControllerDelegate <NSObject>
+
+@optional
+- (void)unityDidReturnToNativeWindow:(UIViewController *)fromController;
+
+@end
+
+
 @interface WTUnitySDK : NSObject
 
 + (WTUnitySDK *)sharedSDK;
 + (UnityFramework *)ufw;
 
+#pragma Config Methods
 -(void)runInMainWithArgc:(int)argc argv:(char **)argv;
 - (void)setLaunchOptions:(NSDictionary *)opts;
-
-- (BOOL)isUnityInitialized;
-- (BOOL)isQuitted;
-
-- (void)preloadIfNeed;
-- (BOOL)initUnity;
-- (void)unloadUnity;
-- (void)quitUnity;
-
-- (void)showNativeWindow;
-//- (void)showUnityWindow;
 - (void)setMainWindow:(UIWindow *)window;
+
+#pragma Operation Methods
+- (void)showNativeWindow;
+- (void)showUnityWindowFrom:(UIViewController *)fromController withController:(UIViewController *)uiController;
 
 @end

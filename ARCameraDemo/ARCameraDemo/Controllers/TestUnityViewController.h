@@ -1,5 +1,5 @@
 //
-//  UnityAppTestViewController.h
+//  TestUnityViewController.h
 //  ARCameraDemo
 //
 //  Created by innerpeacer on 2022/3/28.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UnityAppTestViewController : UIViewController
+@interface TestUnityViewController : UIViewController
 
 @end
 

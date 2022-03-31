@@ -17,17 +17,17 @@ void ShowAlert(NSString *title, NSString *msg) {
 }
 
 UnityFramework *LoadUnityFramework() {
-    NSLog(@"UnityFrameworkLoad");
+//    NSLog(@"UnityFrameworkLoad");
     
     NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
     NSString *bundlePath = [mainBundlePath stringByAppendingString:@"/Frameworks/UnityFramework.framework"];
 
     NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
     if ([bundle isLoaded] == false) {
-        NSLog(@"[bundle load]");
+//        NSLog(@"[bundle load]");
         [bundle load];
     }
-    NSLog(@"isLoaded: %d", [bundle isLoaded]);
+//    NSLog(@"isLoaded: %d", [bundle isLoaded]);
 
     UnityFramework *ufw = [bundle.principalClass getInstance];
     if (![ufw appController]) {
@@ -46,6 +46,9 @@ UnityFramework *LoadUnityFramework() {
 
 @property UnityFramework *ufw;
 @property BOOL quitted;
+
+@property (nonatomic, weak) UIViewController<WTUnityOverlayViewDelegate> *nativeUIController;
+@property (nonatomic, weak) UIViewController<WTUnityViewControllerDelegate> *fromController;
 
 @end
 
@@ -148,13 +151,30 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)showNativeWindow
 {
+    if (self.nativeUIController) {
+        [self.nativeUIController dismissModalViewControllerAnimated:YES];
+        self.nativeUIController = nil;
+    }
+    [self unloadUnity];
     [mainWindow makeKeyAndVisible];
+    if ([self.fromController respondsToSelector:@selector(unityDidReturnToNativeWindow:)]) {
+        [self.fromController unityDidReturnToNativeWindow:self.fromController];
+    }
+    self.fromController = nil;
 }
 
-- (void)showUnityWindow
+- (void)showUnityWindowFrom:(UIViewController<WTUnityViewControllerDelegate> *)fromController withController:(UIViewController<WTUnityOverlayViewDelegate> *)uiController
 {
     NSLog(@"[WTUnitySDK].showUnityWindow");
+    self.fromController = fromController;
+    self.nativeUIController = uiController;
     [self initUnity];
+    [self.fromController presentModalViewController:self.nativeUIController animated:YES];
+    
+    auto view = [[[WTUnitySDK ufw] appController] rootView];
+    if (uiController && [uiController respondsToSelector:@selector(viewToOverlayInUnity)]) {
+        [view addSubview:[uiController viewToOverlayInUnity]];
+    }
 }
 
 - (void)unloadUnity
@@ -175,6 +195,7 @@ UnityFramework *LoadUnityFramework() {
     }
 }
 
+#pragma mark Framework LifeCycle
 - (void)applicationWillResignActive:(UIApplication *)application {
     [[_ufw appController] applicationWillResignActive:application];
 }
@@ -197,7 +218,7 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)unityDidUnload:(NSNotification *)notification
 {
-    NSLog(@"unityDidUnload");
+//    NSLog(@"unityDidUnload");
     [_ufw unregisterFrameworkListener:self];
     _ufw = nil;
 //    [self showHostMainWindow:@""];
@@ -205,8 +226,7 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)unityDidQuit:(NSNotification *)notification
 {
-    NSLog(@"unityDidQuit");
-    
+//    NSLog(@"unityDidQuit");
     [_ufw unregisterFrameworkListener:self];
     _ufw = nil;
     _quitted = YES;
