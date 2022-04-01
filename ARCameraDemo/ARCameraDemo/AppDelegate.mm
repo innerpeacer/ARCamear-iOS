@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 #import "WTUnitySDK.h"
+#import "MockingFileHelper.h"
 
 @interface AppDelegate ()
 
@@ -15,6 +16,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [MockingFileHelper checkMockingFile];
+    
     [[WTUnitySDK sharedSDK] setLaunchOptions:launchOptions];
     [[WTUnitySDK sharedSDK] setMainWindow:self.window];
     return YES;

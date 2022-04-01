@@ -10,6 +10,7 @@
 #import <UnityFramework/WTNativeCallUnityProxy.h>
 #import <UnityFramework/WTUnityCallNativeProxy.h>
 #import "WTUnitySDK.h"
+#import "MockingFileHelper.h"
 
 @interface TestUnityViewController () <WTUnityOverlayViewDelegate, WTUnityTestingCallbackProtocol>
 
@@ -18,6 +19,7 @@
 @property(nonatomic, strong) UIButton *returnToNativeButton;
 @property(nonatomic, strong) UIButton *sendMessageButton;
 @property(nonatomic, strong) UIButton *callUnityApiButton;
+@property(nonatomic, strong) UIButton *loadModelButton;
 
 @end
 
@@ -80,6 +82,17 @@
         [self.containerView addSubview:self.callUnityApiButton];
         [self.callUnityApiButton addTarget:self action:@selector(callUnityApi) forControlEvents:UIControlEventPrimaryActionTriggered];
     }
+    
+    {
+        self.loadModelButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [self.loadModelButton setTitle:@"Load Model" forState:UIControlStateNormal];
+        self.loadModelButton.frame = CGRectMake(0, 0, 150, 44);
+        self.loadModelButton.center = CGPointMake(300, 100);
+        self.loadModelButton.backgroundColor = [UIColor blueColor];
+        [self.containerView addSubview:self.loadModelButton];
+        [self.loadModelButton addTarget:self action:@selector(sendUnityLoadModel) forControlEvents:UIControlEventPrimaryActionTriggered];
+
+    }
 }
 
 - (void)sendUnityMessage
@@ -88,6 +101,21 @@
     NSArray *colorArray = @[@"red", @"blue", @"yellow", @"black"];
     int randomIndex = (int)(arc4random() % 4);
     [[WTUnitySDK ufw] sendMessageToGOWithName:"AppTest" functionName:"ChangeCubeColor" message:[colorArray[randomIndex] UTF8String]];
+}
+
+- (void)sendUnityLoadModel
+{
+    NSLog(@"sendUnityLoadModel");
+    NSString *dir = [MockingFileHelper modelRootDirectory];
+    
+    NSString *modelName;
+    modelName = @"Signpost.glb";
+//    modelName = @"Kiosk.glb";
+//    modelName = @"person.glb";
+    
+    NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
+
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"AppTest" functionName:"AddLoadGltfModel" message:modelPath.UTF8String];
 }
 
 - (void)callUnityApi
