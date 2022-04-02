@@ -52,6 +52,7 @@
 
 - (void)initButtons {
     NSLog(@"initButtons");
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     self.containerView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     {
         self.returnToNativeButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -67,7 +68,7 @@
         self.sendMessageButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [self.sendMessageButton setTitle:@"Send Unity Message" forState:UIControlStateNormal];
         self.sendMessageButton.frame = CGRectMake(0, 0, 150, 44);
-        self.sendMessageButton.center = CGPointMake(100, 350);
+        self.sendMessageButton.center = CGPointMake(100, screenSize.height - 100);
         self.sendMessageButton.backgroundColor = [UIColor yellowColor];
         [self.containerView addSubview:self.sendMessageButton];
         [self.sendMessageButton addTarget:self action:@selector(sendUnityMessage) forControlEvents:UIControlEventPrimaryActionTriggered];
@@ -77,7 +78,7 @@
         self.callUnityApiButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [self.callUnityApiButton setTitle:@"Call Unity API" forState:UIControlStateNormal];
         self.callUnityApiButton.frame = CGRectMake(0, 0, 150, 44);
-        self.callUnityApiButton.center = CGPointMake(300, 350);
+        self.callUnityApiButton.center = CGPointMake(300, screenSize.height - 100);
         self.callUnityApiButton.backgroundColor = [UIColor blueColor];
         [self.containerView addSubview:self.callUnityApiButton];
         [self.callUnityApiButton addTarget:self action:@selector(callUnityApi) forControlEvents:UIControlEventPrimaryActionTriggered];
@@ -108,13 +109,12 @@
     NSLog(@"sendUnityLoadModel");
     NSString *dir = [MockingFileHelper modelRootDirectory];
     
-    NSString *modelName;
-    modelName = @"Signpost.glb";
-//    modelName = @"Kiosk.glb";
-//    modelName = @"person.glb";
+    NSArray *models = @[@"Parrot", @"Flamingo", @"Soldier", @"Xbot", @"Horse", @"Stork"];
+    int randomIndex = arc4random() % [models count];
+//    randomIndex = 2;
+    NSString *modelName = [NSString stringWithFormat:@"%@.glb", models[randomIndex]];
     
     NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-
     [[WTUnitySDK ufw] sendMessageToGOWithName:"AppTest" functionName:"AddLoadGltfModel" message:modelPath.UTF8String];
 }
 
