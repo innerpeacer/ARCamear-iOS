@@ -20,6 +20,7 @@
 @property(nonatomic, strong) UIButton *sendMessageButton;
 @property(nonatomic, strong) UIButton *callUnityApiButton;
 @property(nonatomic, strong) UIButton *loadModelButton;
+@property(nonatomic, strong) UIButton *loadMvxButton;
 
 @end
 
@@ -50,49 +51,53 @@
     return self.containerView;
 }
 
+- (UIButton *)createButtonWithTitle:(NSString *)title Color:(UIColor *)color Action:(SEL)action
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:title forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 150, 44);
+    button.backgroundColor = color;
+    [button addTarget:self action:action forControlEvents:UIControlEventPrimaryActionTriggered];
+    return button;
+}
+
 - (void)initButtons {
     NSLog(@"initButtons");
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     self.containerView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     {
-        self.returnToNativeButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [self.returnToNativeButton setTitle:@"Return to Native" forState:UIControlStateNormal];
-        self.returnToNativeButton.frame = CGRectMake(0, 0, 150, 44);
-        self.returnToNativeButton.center = CGPointMake(100, 100);
-        self.returnToNativeButton.backgroundColor = [UIColor greenColor];
-        [self.containerView addSubview:self.returnToNativeButton];
-        [self.returnToNativeButton addTarget:self action:@selector(showNativeWindow) forControlEvents:UIControlEventPrimaryActionTriggered];
+        UIButton *button = [self createButtonWithTitle:@"Return To Native" Color:[UIColor greenColor] Action:@selector(showNativeWindow)];
+        button.center = CGPointMake(100, 100);
+        [self.containerView addSubview:button];
+        self.returnToNativeButton = button;
     }
 
     {
-        self.sendMessageButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [self.sendMessageButton setTitle:@"Send Unity Message" forState:UIControlStateNormal];
-        self.sendMessageButton.frame = CGRectMake(0, 0, 150, 44);
-        self.sendMessageButton.center = CGPointMake(100, screenSize.height - 100);
-        self.sendMessageButton.backgroundColor = [UIColor yellowColor];
-        [self.containerView addSubview:self.sendMessageButton];
-        [self.sendMessageButton addTarget:self action:@selector(sendUnityMessage) forControlEvents:UIControlEventPrimaryActionTriggered];
+        UIButton *button = [self createButtonWithTitle:@"Send Unity Message" Color:[UIColor yellowColor] Action:@selector(sendUnityMessage)];
+        button.center = CGPointMake(100, screenSize.height - 100);
+        [self.containerView addSubview:button];
+        self.sendMessageButton = button;
     }
     
     {
-        self.callUnityApiButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [self.callUnityApiButton setTitle:@"Call Unity API" forState:UIControlStateNormal];
-        self.callUnityApiButton.frame = CGRectMake(0, 0, 150, 44);
-        self.callUnityApiButton.center = CGPointMake(300, screenSize.height - 100);
-        self.callUnityApiButton.backgroundColor = [UIColor blueColor];
-        [self.containerView addSubview:self.callUnityApiButton];
-        [self.callUnityApiButton addTarget:self action:@selector(callUnityApi) forControlEvents:UIControlEventPrimaryActionTriggered];
+        UIButton *button = [self createButtonWithTitle:@"Call Unity API" Color:[UIColor yellowColor] Action:@selector(callUnityApi)];
+        button.center = CGPointMake(300, screenSize.height - 100);
+        [self.containerView addSubview:button];
+        self.callUnityApiButton = button;
     }
     
     {
-        self.loadModelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [self.loadModelButton setTitle:@"Load Model" forState:UIControlStateNormal];
-        self.loadModelButton.frame = CGRectMake(0, 0, 150, 44);
-        self.loadModelButton.center = CGPointMake(300, 100);
-        self.loadModelButton.backgroundColor = [UIColor blueColor];
-        [self.containerView addSubview:self.loadModelButton];
-        [self.loadModelButton addTarget:self action:@selector(sendUnityLoadModel) forControlEvents:UIControlEventPrimaryActionTriggered];
-
+        UIButton *button = [self createButtonWithTitle:@"Load Model" Color:[UIColor blueColor] Action:@selector(sendUnityLoadModel)];
+        button.center = CGPointMake(300, 100);
+        [self.containerView addSubview:button];
+        self.loadModelButton = button;
+    }
+    
+    {
+        UIButton *button = [self createButtonWithTitle:@"Load Mvx" Color:[UIColor blueColor] Action:@selector(sendUnityLoadMvxModel)];
+        button.center = CGPointMake(300, 200);
+        [self.containerView addSubview:button];
+        self.loadMvxButton = button;
     }
 }
 
@@ -115,7 +120,18 @@
     NSString *modelName = [NSString stringWithFormat:@"%@.glb", models[randomIndex]];
     
     NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"AppTest" functionName:"AddLoadGltfModel" message:modelPath.UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"AppTest" functionName:"AddGltfModel" message:modelPath.UTF8String];
+}
+
+- (void)sendUnityLoadMvxModel
+{
+    NSLog(@"sendUnityLoadMvxModel");
+    
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
+    
+    NSString *modelName = @"1.mvx";
+    NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"AppTest" functionName:"AddMvxModel" message:modelPath.UTF8String];
 }
 
 - (void)callUnityApi
