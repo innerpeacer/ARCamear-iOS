@@ -38,6 +38,7 @@
     [super viewDidLoad];
     
     [NSClassFromString(@"WTUnityCallbackUtils") registerApiForTestingCallbacks:self];
+    [[WTUnitySDK sharedSDK] switchToScene:@"AppTest"];
 }
 
 - (void)showNativeWindow

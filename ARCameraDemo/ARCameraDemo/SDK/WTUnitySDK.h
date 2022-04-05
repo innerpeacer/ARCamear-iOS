@@ -36,5 +36,6 @@
 #pragma Operation Methods
 - (void)showNativeWindow;
 - (void)showUnityWindowFrom:(UIViewController *)fromController withController:(UIViewController *)uiController;
+- (void)switchToScene:(NSString *)sceneName;
 
 @end

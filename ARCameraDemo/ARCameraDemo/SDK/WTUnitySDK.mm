@@ -155,7 +155,12 @@ UnityFramework *LoadUnityFramework() {
         [self.nativeUIController dismissModalViewControllerAnimated:YES];
         self.nativeUIController = nil;
     }
+    auto view = [[[WTUnitySDK ufw] appController] rootView];
+    for (UIView *v in view.subviews) {
+        [v removeFromSuperview];
+    }
     [self unloadUnity];
+    
     [mainWindow makeKeyAndVisible];
     if ([self.fromController respondsToSelector:@selector(unityDidReturnToNativeWindow:)]) {
         [self.fromController unityDidReturnToNativeWindow:self.fromController];
@@ -175,6 +180,11 @@ UnityFramework *LoadUnityFramework() {
     if (uiController && [uiController respondsToSelector:@selector(viewToOverlayInUnity)]) {
         [view addSubview:[uiController viewToOverlayInUnity]];
     }
+}
+
+- (void)switchToScene:(NSString *)sceneName
+{
+    [[self ufw] sendMessageToGOWithName:"AppObject" functionName:"SwitchScene" message:sceneName.UTF8String];
 }
 
 - (void)unloadUnity

@@ -7,15 +7,14 @@
 
 #import "MenuViewController.h"
 #import "TestUnityViewController.h"
+#import "ARCameraViewController.h"
 #import "AppDelegate.h"
 #import "WTUnitySDK.h"
 
 @interface MenuViewController () <WTUnityViewControllerDelegate>
 
-@property(nonatomic, strong) UIButton *showUnityButton;
-@property(nonatomic, strong) UIButton *hideUnityButton;
-@property(nonatomic, strong) UIButton *unloadUnityButton;
-@property(nonatomic, strong) UIButton *quitUnityButton;
+@property(nonatomic, strong) UIButton *appTestButton;
+@property(nonatomic, strong) UIButton *arCameraButton;
 
 @end
 
@@ -29,10 +28,18 @@
     [self initButtons];
 }
 
-- (void)btnShowUnityWindowClicked:(id)sender
+- (void)btnAppTestClicked:(id)sender
 {
     NSLog(@"showUnityButton clicked!");
     TestUnityViewController *controller = [[TestUnityViewController alloc] init];
+    [[WTUnitySDK sharedSDK] showUnityWindowFrom:self withController:controller];
+}
+
+- (void)btnARCameraClicked:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    ARCameraViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"arCameraController"];
+//    [self.navigationController pushViewController:controller animated:YES];
     [[WTUnitySDK sharedSDK] showUnityWindowFrom:self withController:controller];
 }
 
@@ -41,14 +48,30 @@
     NSLog(@"Unity Return to Main");
 }
 
+- (UIButton *)createButtonWithTitle:(NSString *)title Color:(UIColor *)color Action:(SEL)action
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:title forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 150, 44);
+    button.backgroundColor = color;
+    [button addTarget:self action:action forControlEvents:UIControlEventPrimaryActionTriggered];
+    return button;
+}
+
 - (void)initButtons {
-    self.showUnityButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.showUnityButton setTitle:@"Show Unity" forState:UIControlStateNormal];
-    self.showUnityButton.frame = CGRectMake(0, 0, 150, 44);
-    self.showUnityButton.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-    self.showUnityButton.backgroundColor = [UIColor greenColor];
-    [self.showUnityButton  addTarget:self action:@selector(btnShowUnityWindowClicked:) forControlEvents:UIControlEventPrimaryActionTriggered];
-    [self.view addSubview:self.showUnityButton];
+    {
+        UIButton *button = [self createButtonWithTitle:@"AppTest" Color:[UIColor greenColor] Action:@selector(btnAppTestClicked:)];
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 50);
+        [self.view addSubview:button];
+        self.appTestButton = button;
+    }
+    
+    {
+        UIButton *button = [self createButtonWithTitle:@"AR Camera" Color:[UIColor greenColor] Action:@selector(btnARCameraClicked:)];
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 + 50);
+        [self.view addSubview:button];
+        self.arCameraButton = button;
+    }
 }
 
 @end
