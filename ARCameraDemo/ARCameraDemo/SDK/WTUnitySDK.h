@@ -38,4 +38,14 @@
 - (void)showUnityWindowFrom:(UIViewController *)fromController withController:(UIViewController *)uiController;
 - (void)switchToScene:(NSString *)sceneName;
 
+
+#pragma Select Model
+- (void)useMantisVisionModel:(NSString *)modelPath;
+- (void)useCommon3DModel:(NSString *)modelPath;
+
+#pragma Shooting
+- (void)takePhoto:(NSString *)pID;
+- (void)startRecordingVideo:(NSString *)vID;
+- (void)stopRecordingVideo;
+
 @end

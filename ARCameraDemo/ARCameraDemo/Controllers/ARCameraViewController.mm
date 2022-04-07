@@ -12,16 +12,18 @@
 #import "MockingFileHelper.h"
 
 
-@interface ARCameraViewController() <WTUnityOverlayViewDelegate>
+@interface ARCameraViewController() <WTUnityOverlayViewDelegate, WTUnityShootingCallbackProtocol>
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIView *shootingView;
 @property (weak, nonatomic) IBOutlet UIView *modelView;
 @property (weak, nonatomic) IBOutlet UIButton *modelButton;
 @property (weak, nonatomic) IBOutlet UIButton *mvxButton;
+@property (weak, nonatomic) IBOutlet UIButton *switchButton;
 
 @property (nonatomic, strong) UIButton *takePhotoButton;
-@property (nonatomic, strong) UIButton *takeVideoButton;
+@property (nonatomic, strong) UIButton *startVideoButton;
+@property (nonatomic, strong) UIButton *stopVideoButton;
 @property (nonatomic, strong) UIButton *backButton;
 
 @end
@@ -33,6 +35,8 @@
     [super viewDidLoad];
     
     NSLog(@"ARCameraViewController.viewDidLoad");
+    
+    [WTUnityCallbackUtils registerApiForShootingCallbacks:self];
 }
 
 - (UIView *)viewToOverlayInUnity
@@ -50,10 +54,18 @@
     }
     
     {
-        UIButton *button = [self createButtonWithTitle:@"Video" Color:[UIColor greenColor] Action:@selector(takeVideoClicked:)];
-        button.center = CGPointMake(width-100, 50);
+        UIButton *button = [self createButtonWithTitle:@"Start Video" Color:[UIColor greenColor] Action:@selector(startVideoClicked:)];
+        button.center = CGPointMake(width-120, 50);
         [self.shootingView addSubview:button];
-        self.takeVideoButton = button;
+        self.startVideoButton = button;
+    }
+    
+    {
+        UIButton *button = [self createButtonWithTitle:@"Stop Video" Color:[UIColor greenColor] Action:@selector(stopVideoClicked:)];
+        button.center = CGPointMake(width-120, 150);
+        [self.shootingView addSubview:button];
+        self.stopVideoButton = button;
+        self.stopVideoButton.enabled = NO;
     }
     
     {
@@ -65,6 +77,7 @@
     
     [self.modelButton addTarget:self action:@selector(modelSelected:) forControlEvents:UIControlEventTouchUpInside];
     [self.mvxButton addTarget:self action:@selector(modelSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [self.switchButton addTarget:self action:@selector(switchButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
 
     return self.containerView;
@@ -78,14 +91,26 @@
         NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
         NSString *modelName = @"1.mvx";
         NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-        [[WTUnitySDK ufw] sendMessageToGOWithName:"AppObject" functionName:"UseMvx" message:modelPath.UTF8String];
+        [[WTUnitySDK sharedSDK] useMantisVisionModel:modelPath];
     } else if (sender == self.modelButton) {
         NSLog(@"Use Model");
         NSString *dir = [MockingFileHelper modelRootDirectory];
         NSString *modelName = @"Flamingo.glb";
         NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-        [[WTUnitySDK ufw] sendMessageToGOWithName:"AppObject" functionName:"UseModel" message:modelPath.UTF8String];
+        [[WTUnitySDK sharedSDK] useCommon3DModel:modelPath];
     }
+    [self switchView];
+}
+
+- (void)switchView
+{
+    self.modelView.hidden = !self.modelView.hidden;
+    self.shootingView.hidden = !self.shootingView.hidden;
+}
+
+- (void)switchButtonClicked:(id)sender
+{
+    [self switchView];
 }
 
 - (void)backButtonClicked:(id)sender
@@ -96,21 +121,50 @@
 - (void)takePhotoClicked:(id)sender
 {
     NSLog(@"takePhotoClicked");
+    [[WTUnitySDK sharedSDK] takePhoto:@"TestPhoto"];
 }
 
-- (void)takeVideoClicked:(id)sender
+- (void)startVideoClicked:(id)sender
 {
-    NSLog(@"takeVideoClicked");
+    NSLog(@"startVideoClicked");
+    [[WTUnitySDK sharedSDK] startRecordingVideo:@"TestVideo"];
+    self.startVideoButton.enabled = NO;
+    self.stopVideoButton.enabled = YES;
+}
+
+- (void)stopVideoClicked:(id)sender
+{
+    NSLog(@"stopVideoClicked");
+    [[WTUnitySDK sharedSDK] stopRecordingVideo];
+    self.startVideoButton.enabled = YES;
+    self.stopVideoButton.enabled = NO;
 }
 
 - (UIButton *)createButtonWithTitle:(NSString *)title Color:(UIColor *)color Action:(SEL)action
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     [button setTitle:title forState:UIControlStateNormal];
-    button.frame = CGRectMake(0, 0, 150, 44);
+    button.frame = CGRectMake(0, 0, 120, 44);
     button.backgroundColor = color;
     [button addTarget:self action:action forControlEvents:UIControlEventPrimaryActionTriggered];
     return button;
+}
+
+
+- (void)unityDidFinishPhotoing:(NSString *)pID withPath:(NSString *)path
+{
+    NSLog(@"unityDidFinishPhotoing: %@, %@", pID, path);
+}
+
+- (void)unityDidStartRecording:(NSString *)vID
+{
+    NSLog(@"unityDidStartRecording: %@", vID);
+}
+
+
+- (void)unityDidFinishRecording:(NSString *)vID withPath:(NSString *)path
+{
+    NSLog(@"unityDidFinishRecording: %@, %@", vID, path);
 }
 
 @end

@@ -184,7 +184,32 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)switchToScene:(NSString *)sceneName
 {
-    [[self ufw] sendMessageToGOWithName:"AppObject" functionName:"SwitchScene" message:sceneName.UTF8String];
+    [[self ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"SwitchScene" message:sceneName.UTF8String];
+}
+
+- (void)useMantisVisionModel:(NSString *)modelPath
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"UseMvx" message:modelPath.UTF8String];
+}
+
+- (void)useCommon3DModel:(NSString *)modelPath
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"UseModel" message:modelPath.UTF8String];
+}
+
+- (void)takePhoto:(NSString *)pID
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"TakePhoto" message:pID.UTF8String];
+}
+
+- (void)startRecordingVideo:(NSString *)vID
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"StartRecordingVideo" message:vID.UTF8String];
+}
+
+- (void)stopRecordingVideo
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"StopRecordingVideo" message:""];
 }
 
 - (void)unloadUnity
