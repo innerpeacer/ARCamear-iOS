@@ -154,6 +154,11 @@
 - (void)unityDidFinishPhotoing:(NSString *)pID withPath:(NSString *)path
 {
     NSLog(@"unityDidFinishPhotoing: %@, %@", pID, path);
+    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    NSLog(@"Exist: %d", isExist);
+    
+    UIImage *image = [UIImage imageWithContentsOfFile:path];
+    NSLog(@"Image: %d/%d", (int)image.size.width, (int)image.size.height);
 }
 
 - (void)unityDidStartRecording:(NSString *)vID
@@ -165,6 +170,13 @@
 - (void)unityDidFinishRecording:(NSString *)vID withPath:(NSString *)path
 {
     NSLog(@"unityDidFinishRecording: %@, %@", vID, path);
+    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    NSLog(@"Exist: %d", isExist);
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:path traverseLink:YES];
+    unsigned long long length = [fileAttributes fileSize];
+    float fileSize = length/1024.0/1024.0;
+    NSLog(@"VideSize: %.2f MB", fileSize);
+
 }
 
 @end
