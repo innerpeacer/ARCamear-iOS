@@ -37,6 +37,7 @@
     NSLog(@"ARCameraViewController.viewDidLoad");
     
     [WTUnityCallbackUtils registerApiForShootingCallbacks:self];
+    [[WTUnitySDK sharedSDK] setShootingParams:WTShooting_SD];
 }
 
 - (UIView *)viewToOverlayInUnity
@@ -121,13 +122,13 @@
 - (void)takePhotoClicked:(id)sender
 {
     NSLog(@"takePhotoClicked");
-    [[WTUnitySDK sharedSDK] takePhoto:@"TestPhoto"];
+    [[WTUnitySDK sharedSDK] takePhoto:@"HD"];
 }
 
 - (void)startVideoClicked:(id)sender
 {
     NSLog(@"startVideoClicked");
-    [[WTUnitySDK sharedSDK] startRecordingVideo:@"TestVideo"];
+    [[WTUnitySDK sharedSDK] startRecordingVideo:@"HD"];
     self.startVideoButton.enabled = NO;
     self.stopVideoButton.enabled = YES;
 }

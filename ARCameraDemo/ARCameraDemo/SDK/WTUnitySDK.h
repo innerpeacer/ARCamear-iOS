@@ -22,6 +22,11 @@
 
 @end
 
+typedef enum _WTShootingParams {
+    WTShooting_SD,
+    WTShooting_HD
+} WTShootingParams;
+
 
 @interface WTUnitySDK : NSObject
 
@@ -44,6 +49,7 @@
 - (void)useCommon3DModel:(NSString *)modelPath;
 
 #pragma Shooting
+- (void)setShootingParams:(WTShootingParams)params;
 - (void)takePhoto:(NSString *)pID;
 - (void)startRecordingVideo:(NSString *)vID;
 - (void)stopRecordingVideo;

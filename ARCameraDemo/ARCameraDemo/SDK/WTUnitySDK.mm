@@ -197,6 +197,23 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"UseModel" message:modelPath.UTF8String];
 }
 
+- (void)setShootingParams:(WTShootingParams)params
+{
+    double photoSuperSize = 1;
+    double videoSuperSize = 0.5;
+    int videoFrameRate = 24;
+    
+    if (params == WTShooting_HD) {
+        photoSuperSize = 2;
+        videoSuperSize = 1;
+        videoFrameRate = 60;
+    }
+    
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"SetPhotoSuperSize" message:[NSString stringWithFormat:@"%f", photoSuperSize].UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"SetVideoSuperSize" message:[NSString stringWithFormat:@"%f", videoSuperSize].UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"SetVideoFrameRate" message:[NSString stringWithFormat:@"%d", videoFrameRate].UTF8String];
+}
+
 - (void)takePhoto:(NSString *)pID
 {
     [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"TakePhoto" message:pID.UTF8String];
