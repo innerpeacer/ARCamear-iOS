@@ -14,7 +14,7 @@
 
 @interface TestUnityViewController () <WTUnityOverlayViewDelegate, WTUnityTestingCallbackProtocol>
 
-@property(nonatomic, strong) UIView *containerView;
+@property(nonatomic, strong) WTUnityContainerView *containerView;
 
 @property(nonatomic, strong) UIButton *returnToNativeButton;
 @property(nonatomic, strong) UIButton *sendMessageButton;
@@ -65,7 +65,7 @@
 - (void)initButtons {
     NSLog(@"initButtons");
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    self.containerView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.containerView = [[WTUnityContainerView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     {
         UIButton *button = [self createButtonWithTitle:@"Return To Native" Color:[UIColor greenColor] Action:@selector(showNativeWindow)];
         button.center = CGPointMake(100, 100);

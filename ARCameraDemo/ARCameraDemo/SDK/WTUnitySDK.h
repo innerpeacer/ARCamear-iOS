@@ -8,10 +8,14 @@
 #import <Foundation/Foundation.h>
 #import <UnityFramework/UnityFramework.h>
 
+@interface WTUnityContainerView : UIView
+
+@end
+
 @protocol WTUnityOverlayViewDelegate <NSObject>
 
 @optional
-- (UIView *)viewToOverlayInUnity;
+- (WTUnityContainerView *)viewToOverlayInUnity;
 
 @end
 
