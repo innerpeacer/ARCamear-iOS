@@ -155,7 +155,11 @@ UnityFramework *LoadUnityFramework() {
 - (void)showNativeWindow
 {
     if (self.nativeUIController) {
-        [self.nativeUIController dismissModalViewControllerAnimated:YES];
+        if (self.nativeUIController.navigationController) {
+            [self.nativeUIController.navigationController popViewControllerAnimated:YES];
+        } else {
+            [self.nativeUIController dismissModalViewControllerAnimated:YES];
+        }
         self.nativeUIController = nil;
     }
     auto view = [[[WTUnitySDK ufw] appController] rootView];
@@ -177,7 +181,11 @@ UnityFramework *LoadUnityFramework() {
     self.fromController = fromController;
     self.nativeUIController = uiController;
     [self initUnity];
-    [self.fromController presentModalViewController:self.nativeUIController animated:YES];
+    if (self.fromController.navigationController) {
+        [self.fromController.navigationController pushViewController:self.nativeUIController animated:YES];
+    } else {
+        [self.fromController presentModalViewController:self.nativeUIController animated:YES];
+    }
     
     auto view = [[[WTUnitySDK ufw] appController] rootView];
     if (uiController && [uiController respondsToSelector:@selector(viewToOverlayInUnity)]) {
