@@ -8,6 +8,7 @@
 #import "MenuViewController.h"
 #import "TestUnityViewController.h"
 #import "ARCameraViewController.h"
+#import "ARPreviewViewController.h"
 #import "AppDelegate.h"
 #import "WTUnitySDK.h"
 
@@ -15,6 +16,7 @@
 
 @property(nonatomic, strong) UIButton *appTestButton;
 @property(nonatomic, strong) UIButton *arCameraButton;
+@property(nonatomic, strong) UIButton *arPreviewButton;
 
 @end
 
@@ -43,6 +45,12 @@
     [[WTUnitySDK sharedSDK] showUnityWindowFrom:self withController:controller];
 }
 
+- (void)btnARPreviewClicked:(id)sender
+{
+    ARPreviewViewController *controller = [[ARPreviewViewController alloc] init];
+    [[WTUnitySDK sharedSDK] showUnityWindowFrom:self withController:controller];
+}
+
 - (void)unityDidReturnToNativeWindow:(UIViewController *)fromController
 {
     NSLog(@"Unity Return to Main");
@@ -61,16 +69,23 @@
 - (void)initButtons {
     {
         UIButton *button = [self createButtonWithTitle:@"AppTest" Color:[UIColor greenColor] Action:@selector(btnAppTestClicked:)];
-        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 50);
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 100);
         [self.view addSubview:button];
         self.appTestButton = button;
     }
     
     {
         UIButton *button = [self createButtonWithTitle:@"AR Camera" Color:[UIColor greenColor] Action:@selector(btnARCameraClicked:)];
-        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 + 50);
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
         [self.view addSubview:button];
         self.arCameraButton = button;
+    }
+    
+    {
+        UIButton *button = [self createButtonWithTitle:@"AR Preview" Color:[UIColor greenColor] Action:@selector(btnARPreviewClicked:)];
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 + 100);
+        [self.view addSubview:button];
+        self.arPreviewButton = button;
     }
 }
 

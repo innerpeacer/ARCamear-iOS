@@ -54,6 +54,9 @@ UnityFramework *LoadUnityFramework() {
 
 @implementation WTUnitySDK
 
+#define AR_CAMERA_CONTROLLER "ARCameraSceneController"
+#define AR_PREVIEW_CONTROLLER "ARPreviewSceneController"
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -184,17 +187,17 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)switchToScene:(NSString *)sceneName
 {
-    [[self ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"SwitchScene" message:sceneName.UTF8String];
+    [[self ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"SwitchScene" message:sceneName.UTF8String];
 }
 
 - (void)useMantisVisionModel:(NSString *)modelPath
 {
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"UseMvx" message:modelPath.UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"UseMvx" message:modelPath.UTF8String];
 }
 
 - (void)useCommon3DModel:(NSString *)modelPath
 {
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"UseModel" message:modelPath.UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"UseModel" message:modelPath.UTF8String];
 }
 
 - (void)setShootingParams:(WTShootingParams)params
@@ -209,24 +212,37 @@ UnityFramework *LoadUnityFramework() {
         videoFrameRate = 60;
     }
     
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"SetPhotoSuperSize" message:[NSString stringWithFormat:@"%f", photoSuperSize].UTF8String];
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"SetVideoSuperSize" message:[NSString stringWithFormat:@"%f", videoSuperSize].UTF8String];
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"SetVideoFrameRate" message:[NSString stringWithFormat:@"%d", videoFrameRate].UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"SetPhotoSuperSize" message:[NSString stringWithFormat:@"%f", photoSuperSize].UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"SetVideoSuperSize" message:[NSString stringWithFormat:@"%f", videoSuperSize].UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"SetVideoFrameRate" message:[NSString stringWithFormat:@"%d", videoFrameRate].UTF8String];
 }
 
 - (void)takePhoto:(NSString *)pID
 {
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"TakePhoto" message:pID.UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"TakePhoto" message:pID.UTF8String];
 }
 
 - (void)startRecordingVideo:(NSString *)vID
 {
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"StartRecordingVideo" message:vID.UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"StartRecordingVideo" message:vID.UTF8String];
 }
 
 - (void)stopRecordingVideo
 {
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"ARCameraSceneController" functionName:"StopRecordingVideo" message:""];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"StopRecordingVideo" message:""];
+}
+
+- (void)previewMantisVisionModel:(NSString *)modelPath
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"PreviewMvxModel" message:modelPath.UTF8String];
+}
+
+- (void)setPreviewCameraDistance:(float)d
+{
+    if (d <= 0) {
+        return;
+    }
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetCameraPositionZ" message:[NSString stringWithFormat:@"%f", -d].UTF8String];
 }
 
 - (void)unloadUnity

@@ -58,4 +58,8 @@ typedef enum _WTShootingParams {
 - (void)startRecordingVideo:(NSString *)vID;
 - (void)stopRecordingVideo;
 
+#pragma Preview
+- (void)previewMantisVisionModel:(NSString *)modelPath;
+- (void)setPreviewCameraDistance:(float)d;
+
 @end
