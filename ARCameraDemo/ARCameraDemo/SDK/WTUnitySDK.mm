@@ -250,7 +250,7 @@ UnityFramework *LoadUnityFramework() {
     if (d <= 0) {
         return;
     }
-    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetCameraPositionZ" message:[NSString stringWithFormat:@"%f", -d].UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetPreviewCameraDistance" message:[NSString stringWithFormat:@"%f", -d].UTF8String];
 }
 
 - (void)unloadUnity
