@@ -81,7 +81,7 @@
     }
     
     {
-        UIButton *button = [self createButtonWithTitle:@"Call Unity API" Color:[UIColor yellowColor] Action:@selector(callUnityApi)];
+        UIButton *button = [self createButtonWithTitle:@"Call Unity API" Color:[UIColor yellowColor] Action:@selector(sendUnityMessageWithJson)];
         button.center = CGPointMake(300, screenSize.height - 100);
         [self.containerView addSubview:button];
         self.callUnityApiButton = button;
@@ -109,6 +109,19 @@
     int randomIndex = (int)(arc4random() % 4);
     [[WTUnitySDK ufw] sendMessageToGOWithName:"AppTest" functionName:"ChangeCubeColor" message:[colorArray[randomIndex] UTF8String]];
 }
+
+- (void)sendUnityMessageWithJson
+{
+    float xy = (arc4random()%100)/50.0f;
+    float z = (arc4random()%100)/50.0f;
+    NSDictionary *params = @{@"xy":@(xy), @"z":@(z)};
+    NSData *data = [NSJSONSerialization dataWithJSONObject:params options:kNilOptions error:nil];
+    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"Params: %@", str);
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"AppTest" functionName:"TestChangeCubeScale" message:str.UTF8String];
+}
+
 
 - (void)sendUnityLoadModel
 {
