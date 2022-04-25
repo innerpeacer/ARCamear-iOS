@@ -31,6 +31,11 @@ typedef enum _WTShootingParams {
     WTShooting_HD
 } WTShootingParams;
 
+typedef enum _WTModelType {
+    WTModel_Common3D = 1,
+    WTModel_MantisVisionHD = 2,
+//    WTModel_MantisVisionSD = 3,
+} WTModelType;
 
 @interface WTUnitySDK : NSObject
 
@@ -48,9 +53,10 @@ typedef enum _WTShootingParams {
 - (void)switchToScene:(NSString *)sceneName;
 
 
-#pragma Select Model
+#pragma Model Handling
 - (void)useMantisVisionModel:(NSString *)modelPath;
 - (void)useCommon3DModel:(NSString *)modelPath;
+- (void)removeModelObject:(NSString *)objectID;
 
 #pragma Shooting
 - (void)setShootingParams:(WTShootingParams)params;

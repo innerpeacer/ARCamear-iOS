@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4lU-cK-CaZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4lU-cK-CaZ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -88,6 +88,12 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="labelColor"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0d-gx-blA" userLabel="removeButton">
+                                        <rect key="frame" x="356" y="183" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" backgroundImage="Remove"/>
+                                    </button>
                                 </subviews>
                             </view>
                         </subviews>
@@ -99,6 +105,7 @@
                         <outlet property="modelButton" destination="B9j-YK-hzz" id="ajv-aL-PhP"/>
                         <outlet property="modelView" destination="kkd-lw-mrM" id="U2v-Kv-OIL"/>
                         <outlet property="mvxButton" destination="ryY-Ze-y9u" id="LoD-jw-0oV"/>
+                        <outlet property="removeButton" destination="L0d-gx-blA" id="e7O-rC-tPa"/>
                         <outlet property="shootingView" destination="SWj-HH-hmB" id="hmS-Wx-s0k"/>
                         <outlet property="switchButton" destination="hEl-EL-DMH" id="gLt-5a-Gyp"/>
                     </connections>
@@ -111,6 +118,7 @@
     <resources>
         <image name="1" width="341.33334350585938" height="341.33334350585938"/>
         <image name="Flamingo" width="341.33334350585938" height="341.33334350585938"/>
+        <image name="Remove" width="66.666664123535156" height="66.666664123535156"/>
         <image name="cross-icon" width="170.66667175292969" height="170.66667175292969"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -12,7 +12,10 @@
 #import "MockingFileHelper.h"
 
 
-@interface ARCameraViewController() <WTUnityOverlayViewDelegate, WTUnityShootingCallbackProtocol>
+@interface ARCameraViewController() <WTUnityOverlayViewDelegate, WTUnityShootingCallbackProtocol, WTModelHandlingCallbackProtocol>
+{
+    NSString *selectedObjectID;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIView *shootingView;
@@ -20,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *modelButton;
 @property (weak, nonatomic) IBOutlet UIButton *mvxButton;
 @property (weak, nonatomic) IBOutlet UIButton *switchButton;
+@property (weak, nonatomic) IBOutlet UIButton *removeButton;
 
 @property (nonatomic, strong) UIButton *takePhotoButton;
 @property (nonatomic, strong) UIButton *startVideoButton;
@@ -37,7 +41,14 @@
     NSLog(@"ARCameraViewController.viewDidLoad");
     
     [WTUnityCallbackUtils registerApiForShootingCallbacks:self];
+    [WTUnityCallbackUtils registerApiForModelHandlingCallbacks:self];
     [[WTUnitySDK sharedSDK] setShootingParams:WTShooting_SD];
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self view];
 }
 
 - (UIView *)viewToOverlayInUnity
@@ -79,9 +90,16 @@
     [self.modelButton addTarget:self action:@selector(modelSelected:) forControlEvents:UIControlEventTouchUpInside];
     [self.mvxButton addTarget:self action:@selector(modelSelected:) forControlEvents:UIControlEventTouchUpInside];
     [self.switchButton addTarget:self action:@selector(switchButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.removeButton addTarget:self action:@selector(removeObjectButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
+    [self showRemoveButton:NO];
 
     return self.containerView;
+}
+
+- (void)showRemoveButton:(BOOL)show
+{
+    self.removeButton.hidden = !show;
 }
 
 - (IBAction)modelSelected:(id)sender
@@ -91,12 +109,14 @@
         NSLog(@"Use Mvx");
         NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
         NSString *modelName = @"1.mvx";
+//        modelName = @"bad.txt";
         NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
         [[WTUnitySDK sharedSDK] useMantisVisionModel:modelPath];
     } else if (sender == self.modelButton) {
         NSLog(@"Use Model");
         NSString *dir = [MockingFileHelper modelRootDirectory];
         NSString *modelName = @"Flamingo.glb";
+//        modelName = @"bad.txt";
         NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
         [[WTUnitySDK sharedSDK] useCommon3DModel:modelPath];
     }
@@ -117,6 +137,14 @@
 - (void)backButtonClicked:(id)sender
 {
     [[WTUnitySDK sharedSDK] showNativeWindow];
+}
+
+- (void)removeObjectButtonClicked:(id)sender
+{
+    NSLog(@"Remove Object: %@", selectedObjectID);
+    [[WTUnitySDK sharedSDK] removeModelObject:selectedObjectID];
+//    [[WTUnitySDK sharedSDK] removeModelObject:@"nil"];
+    [self showRemoveButton:NO];
 }
 
 - (void)takePhotoClicked:(id)sender
@@ -178,6 +206,50 @@
     float fileSize = length/1024.0/1024.0;
     NSLog(@"VideSize: %.2f MB", fileSize);
 
+}
+
+#pragma Model Handling Callback
+- (void)unityDidFinishLoadingModel:(int)modelType withPath:(NSString *)path
+{
+    NSLog(@"Did Load Model: %@", path);
+}
+
+- (void)unityDidFailedLoadingModel:(int)modelType withPath:(NSString *)path description:(NSString *)description
+{
+    NSLog(@"Failed Load Model: %@", description);
+}
+
+- (void)unityDidPlaceModel:(int)modelType withModelID:(NSString *)mID
+{
+    NSString *type = (modelType == WTModel_MantisVisionHD) ? @"Mantis": @"3D";
+    NSLog(@"Did Place %@ Model: %@", type, mID);
+}
+
+- (void)unityDidSelectModel:(int)modelType withModelID:(NSString *)mID
+{
+    NSString *type = (modelType == WTModel_MantisVisionHD) ? @"Mantis": @"3D";
+    NSLog(@"Did Select %@ Model: %@", type, mID);
+    selectedObjectID = mID;
+    [self showRemoveButton:YES];
+}
+
+- (void)unityDidUnselectModel:(int)modelType withModelID:(NSString *)mID
+{
+    NSString *type = (modelType == WTModel_MantisVisionHD) ? @"Mantis": @"3D";
+    NSLog(@"Did unselect %@ Model: %@", type, mID);
+    selectedObjectID = nil;
+    [self showRemoveButton:NO];
+}
+
+- (void)unityDidRemoveModel:(int)modelType withModelID:(NSString *)mID
+{
+    NSString *type = (modelType == WTModel_MantisVisionHD) ? @"Mantis": @"3D";
+    NSLog(@"Did remove %@ Model: %@", type, mID);
+}
+
+- (void)unityDidFailedRemovingModel:(NSString *)mID description:(NSString *)description
+{
+    NSLog(@"Failed Load Model: %@", description);
 }
 
 @end
