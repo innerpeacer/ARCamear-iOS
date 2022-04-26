@@ -12,7 +12,7 @@
 #import "WTUnitySDK.h"
 #import "MockingFileHelper.h"
 
-@interface ARPreviewViewController () <WTUnityOverlayViewDelegate>
+@interface ARPreviewViewController () <WTUnityOverlayViewDelegate, WTUnitySceneControllerCallbackProtocol>
 
 @property(nonatomic, strong) WTUnityContainerView *containerView;
 
@@ -37,7 +37,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [WTUnityCallbackUtils registerApiForSceneControllerCallbacks:self];
     [[WTUnitySDK sharedSDK] switchToScene:@"ARPreviewScene"];
+}
+
+- (void)unityDidLoadScene:(NSString *)sceneName
+{
+//    NSLog(@"======== Did Load Scene: %@", sceneName);
+    if ([sceneName isEqualToString:@"ARPreviewScene"]) {
+        [self previewModel1];
+    }
+}
+
+- (void)unityDidUnloadScene:(NSString *)sceneName
+{
+//    NSLog(@"======== Did UnLoad Scene: %@", sceneName);
 }
 
 - (void)showNativeWindow
