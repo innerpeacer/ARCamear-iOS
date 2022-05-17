@@ -68,5 +68,6 @@ typedef enum _WTModelType {
 #pragma Preview
 - (void)previewMantisVisionModel:(NSString *)modelPath;
 - (void)setPreviewCameraDistance:(float)d;
+- (void)setPreviewBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha;
 
 @end

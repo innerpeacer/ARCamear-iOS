@@ -266,6 +266,12 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetPreviewCameraDistance" message:[NSString stringWithFormat:@"%f", -d].UTF8String];
 }
 
+- (void)setPreviewBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha
+{
+    NSString *params = [WTUnitySDK DictionaryToJson:@{@"r": @(r), @"g": @(g), @"b": @(b), @"a": @(alpha)}];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetBackgroundColor" message:params.UTF8String];
+}
+
 - (void)unloadUnity
 {
     if (![self isUnityInitialized]) {
@@ -320,6 +326,12 @@ UnityFramework *LoadUnityFramework() {
     _ufw = nil;
     _quitted = YES;
 //    [self showHostMainWindow:@""];
+}
+
++ (NSString *)DictionaryToJson:(NSDictionary *)dict
+{
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:kNilOptions error:nil];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 @end

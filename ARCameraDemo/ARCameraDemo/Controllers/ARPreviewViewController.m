@@ -45,6 +45,7 @@
 {
 //    NSLog(@"======== Did Load Scene: %@", sceneName);
     if ([sceneName isEqualToString:@"ARPreviewScene"]) {
+        [[WTUnitySDK sharedSDK] setPreviewBackgroundColorWithRed:1.0 Blue:0.0 Green:0.0 Alpha:1.0f];
         [self previewModel1];
     }
 }
