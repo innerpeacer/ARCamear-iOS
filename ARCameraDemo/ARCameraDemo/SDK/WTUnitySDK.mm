@@ -208,6 +208,11 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"UseModel" message:modelPath.UTF8String];
 }
 
+- (void)useCommon3DModelAsync:(NSString *)modelPath
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"UseModelAsync" message:modelPath.UTF8String];
+}
+
 - (void)removeModelObject:(NSString *)objectID
 {
     if (!objectID) {

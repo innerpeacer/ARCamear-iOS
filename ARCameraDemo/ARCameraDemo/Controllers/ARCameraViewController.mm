@@ -118,7 +118,8 @@
         NSString *modelName = @"Flamingo.glb";
 //        modelName = @"bad.txt";
         NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-        [[WTUnitySDK sharedSDK] useCommon3DModel:modelPath];
+//        [[WTUnitySDK sharedSDK] useCommon3DModel:modelPath];
+        [[WTUnitySDK sharedSDK] useCommon3DModelAsync:modelPath];
     }
     [self switchView];
 }

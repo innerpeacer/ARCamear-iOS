@@ -56,6 +56,7 @@ typedef enum _WTModelType {
 #pragma Model Handling
 - (void)useMantisVisionModel:(NSString *)modelPath;
 - (void)useCommon3DModel:(NSString *)modelPath;
+- (void)useCommon3DModelAsync:(NSString *)modelPath;
 - (void)removeModelObject:(NSString *)objectID;
 
 #pragma Shooting
