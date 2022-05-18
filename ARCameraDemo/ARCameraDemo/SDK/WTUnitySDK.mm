@@ -258,6 +258,12 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"PreviewMvxModel" message:modelPath.UTF8String];
 }
 
+- (void)setPreviewCamareRectWithX:(float)x Y:(float)y Width:(float)width Height:(float)height
+{
+    NSString *params = [WTUnitySDK DictionaryToJson:@{@"x": @(x), @"y": @(y), @"width": @(width), @"height": @(height)}];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetPreviewRect" message:params.UTF8String];
+}
+
 - (void)setPreviewCameraDistance:(float)d
 {
     if (d <= 0) {
