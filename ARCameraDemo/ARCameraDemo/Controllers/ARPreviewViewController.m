@@ -123,18 +123,20 @@
     NSString *modelName = @"1.mvx";
     NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
 
+    [[WTUnitySDK sharedSDK] setPreviewCameraFieldWithXmin: -0.614f XMax: 0.614f YMin: -0.472 YMax: 0.472 ZMin:-0.019 ZMax:1.705];
     [[WTUnitySDK sharedSDK] previewMantisVisionModel:modelPath];
-    [[WTUnitySDK sharedSDK] setPreviewCameraDistance:2];
+
 }
 
 - (void)previewModel2
 {
-    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
-    NSString *modelName = @"2.mvx";
+    NSString *dir = [MockingFileHelper modelRootDirectory];
+    NSString *modelName = @"Rose.glb";
     NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
 
-    [[WTUnitySDK sharedSDK] previewMantisVisionModel:modelPath];
-    [[WTUnitySDK sharedSDK] setPreviewCameraDistance:5];
+    [[WTUnitySDK sharedSDK] setPreviewCameraFieldWithXmin: -0.068 XMax: 0.068 YMin: -0.068 YMax: 0.068 ZMin:0.125 ZMax:0.504];
+    [[WTUnitySDK sharedSDK] previewCommon3DModel:modelPath];
+
 }
 
 @end

@@ -258,6 +258,11 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"PreviewMvxModel" message:modelPath.UTF8String];
 }
 
+- (void)previewCommon3DModel:(NSString *)modelPath
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"PreviewCommon3DModel" message:modelPath.UTF8String];
+}
+
 - (void)setPreviewCamareRectWithX:(float)x Y:(float)y Width:(float)width Height:(float)height
 {
     NSString *params = [WTUnitySDK DictionaryToJson:@{@"x": @(x), @"y": @(y), @"width": @(width), @"height": @(height)}];
@@ -271,6 +276,13 @@ UnityFramework *LoadUnityFramework() {
     }
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetPreviewCameraDistance" message:[NSString stringWithFormat:@"%f", -d].UTF8String];
 }
+
+- (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax
+{
+    NSString *params = [WTUnitySDK DictionaryToJson:@{@"xMin": @(xMin), @"xMax": @(xMax), @"yMin": @(yMin), @"yMax": @(yMax), @"zMin": @(zMin), @"zMax": @(zMax)}];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetCameraField" message:params.UTF8String];
+}
+
 
 - (void)setPreviewBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha
 {
