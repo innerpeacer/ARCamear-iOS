@@ -1,0 +1,32 @@
+{
+    "name": "Flamingo",
+    "type": "3D",
+    "minScale": 0.25,
+    "maxScale": 4,
+    "needsPlane": false,
+    "boundingBox": {
+        "xMin": -0.925,
+        "xMax": 0.925,
+        "yMin": -0.913,
+        "yMax": 0.875,
+        "zMin": 0,
+        "zMax": 1.636
+    },
+    "previewCameraField": {
+        "xMin": -0.925,
+        "xMax": 0.925,
+        "yMin": -0.925,
+        "yMax": 0.925,
+        "zMin": 0,
+        "zMax": 1.636
+    },
+    "collider": {
+        "type": "Sphere",
+        "center": {
+            "x": 0,
+            "y": 0,
+            "z": 0.857
+        },
+        "radius": 0.917
+    }
+}

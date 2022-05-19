@@ -263,6 +263,16 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"PreviewCommon3DModel" message:modelPath.UTF8String];
 }
 
+- (void)previewModelWithPath:(NSString *)modelPath InfoPath:(NSString *)modelInfoPath
+{
+    NSString *params = [WTUnitySDK DictionaryToJson:@{@"modelPath": modelPath, @"modelInfoPath": modelInfoPath}];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"PreviewModel" message:params.UTF8String];
+}
+- (void)loadModelInfo:(NSString *)modelInfoPath
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"LoadModelInfoFile" message:modelInfoPath.UTF8String];
+}
+
 - (void)setPreviewCamareRectWithX:(float)x Y:(float)y Width:(float)width Height:(float)height
 {
     NSString *params = [WTUnitySDK DictionaryToJson:@{@"x": @(x), @"y": @(y), @"width": @(width), @"height": @(height)}];

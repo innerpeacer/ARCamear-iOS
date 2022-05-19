@@ -1,0 +1,36 @@
+{
+    "name": "合金战甲",
+    "type": "3D",
+    "minScale": 0.25,
+    "maxScale": 4,
+    "needsPlane": false,
+    "boundingBox": {
+        "xMin": -0.289,
+        "xMax": 0.644,
+        "yMin": -0.626,
+        "yMax": 0.626,
+        "zMin": 0,
+        "zMax": 1.046
+    },
+    "previewCameraField": {
+        "xMin": -0.644,
+        "xMax": 0.644,
+        "yMin": -0.644,
+        "yMax": 0.644,
+        "zMin": 0,
+        "zMax": 1.046
+    },
+    "collider": {
+        "type": "Box",
+        "center": {
+            "x": 0.065,
+            "y": 0,
+            "z": 0.515
+        },
+        "size": {
+            "x": 0.735,
+            "y": 1.285,
+            "z": 1.03
+        }
+    }
+}

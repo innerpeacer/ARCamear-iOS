@@ -68,6 +68,8 @@ typedef enum _WTModelType {
 #pragma Preview
 - (void)previewMantisVisionModel:(NSString *)modelPath;
 - (void)previewCommon3DModel:(NSString *)modelPath;
+- (void)previewModelWithPath:(NSString *)modelPath InfoPath:(NSString *)modelInfoPath;
+- (void)loadModelInfo:(NSString *)modelInfoPath;
 - (void)setPreviewCamareRectWithX:(float)x Y:(float)y Width:(float)width Height:(float)height;
 //- (void)setPreviewCameraDistance:(float)d;
 - (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax;

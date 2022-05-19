@@ -45,8 +45,8 @@
 {
 //    NSLog(@"======== Did Load Scene: %@", sceneName);
     if ([sceneName isEqualToString:@"ARPreviewScene"]) {
-        [[WTUnitySDK sharedSDK] setPreviewBackgroundColorWithRed:1.0 Blue:0.0 Green:0.5 Alpha:1.0f];
-        [[WTUnitySDK sharedSDK] setPreviewCamareRectWithX:0.0 Y:0.1 Width:1 Height:0.8];
+//        [[WTUnitySDK sharedSDK] setPreviewBackgroundColorWithRed:1.0 Blue:0.0 Green:0.5 Alpha:1.0f];
+//        [[WTUnitySDK sharedSDK] setPreviewCamareRectWithX:0.0 Y:0.1 Width:1 Height:0.8];
         [self previewModel1];
     }
 }
@@ -120,22 +120,23 @@
 - (void)previewModel1
 {
     NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
-    NSString *modelName = @"1.mvx";
-    NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-
-    [[WTUnitySDK sharedSDK] setPreviewCameraFieldWithXmin: -0.614f XMax: 0.614f YMin: -0.472 YMax: 0.472 ZMin:-0.019 ZMax:1.705];
-    [[WTUnitySDK sharedSDK] previewMantisVisionModel:modelPath];
+    NSString *modelName = @"1";
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
 
 }
 
 - (void)previewModel2
 {
     NSString *dir = [MockingFileHelper modelRootDirectory];
-    NSString *modelName = @"Rose.glb";
-    NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-
-    [[WTUnitySDK sharedSDK] setPreviewCameraFieldWithXmin: -0.068 XMax: 0.068 YMin: -0.068 YMax: 0.068 ZMin:0.125 ZMax:0.504];
-    [[WTUnitySDK sharedSDK] previewCommon3DModel:modelPath];
+    NSString *modelName = @"Flamingo";
+//    modelName = @"AlloyArmor";
+//    modelName = @"Spirit";
+//    modelName = @"PSuit";
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.glb", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
 
 }
 

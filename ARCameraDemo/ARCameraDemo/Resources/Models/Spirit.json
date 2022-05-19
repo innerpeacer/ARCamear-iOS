@@ -1,0 +1,34 @@
+{
+    "name": "小精灵",
+    "type": "3D",
+    "minScale": 0.25,
+    "maxScale": 4,
+    "needsPlane": false,
+    "boundingBox": {
+        "xMin": -0.462,
+        "xMax": 0.516,
+        "yMin": -0.217,
+        "yMax": 0.907,
+        "zMin": 0,
+        "zMax": 0.656
+    },
+    "previewCameraField": {
+        "xMin": -0.516,
+        "xMax": 0.516,
+        "yMin": -0.552,
+        "yMax": 0.552,
+        "zMin": 0,
+        "zMax": 0.656
+    },
+    "collider": {
+        "type": "Capsule",
+        "center": {
+            "x": 0.014,
+            "y": 0.293,
+            "z": 0.419
+        },
+        "radius": 0.485,
+        "height": 0.416,
+        "direction": "x-axis"
+    }
+}
