@@ -6,6 +6,7 @@
 //
 
 #import "WTUnitySDK.h"
+#import <UnityFramework/WTUnitySystemEventProxy.h>
 
 void ShowAlert(NSString *title, NSString *msg) {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
@@ -36,7 +37,7 @@ UnityFramework *LoadUnityFramework() {
     return ufw;
 }
 
-@interface WTUnitySDK() <UnityFrameworkListener> {
+@interface WTUnitySDK() <UnityFrameworkListener, WTUnitySystemSceneEventProtocol> {
     int gArgc;
     char **gArgv;
     NSDictionary *appLaunchOpts;
@@ -54,6 +55,7 @@ UnityFramework *LoadUnityFramework() {
 
 @implementation WTUnitySDK
 
+#define SHARED_SCENE_MANAGER "SharedSceneManager"
 #define AR_ENTRY_CONTROLLER "AREntrySceneController"
 #define AR_CAMERA_CONTROLLER "ARCameraSceneController"
 #define AR_PREVIEW_CONTROLLER "ARPreviewSceneController"
@@ -63,6 +65,7 @@ UnityFramework *LoadUnityFramework() {
     if (self) {
         gArgc = 0;
         gArgv = nullptr;
+        [WTUnitySystemEventUtils registerSystemSceneEvents:self];
     }
     return self;
 }
@@ -155,6 +158,7 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)showNativeWindow
 {
+    [self switchToScene:@"ARExitScene"];
     if (self.nativeUIController) {
         if (self.nativeUIController.navigationController) {
             [self.nativeUIController.navigationController popViewControllerAnimated:YES];
@@ -167,7 +171,7 @@ UnityFramework *LoadUnityFramework() {
     for (UIView *v in view.subviews) {
         [v removeFromSuperview];
     }
-    [self unloadUnity];
+//    [self unloadUnity];
     
     [mainWindow makeKeyAndVisible];
     if ([self.fromController respondsToSelector:@selector(unityDidReturnToNativeWindow:)]) {
@@ -196,7 +200,7 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)switchToScene:(NSString *)sceneName
 {
-    [[self ufw] sendMessageToGOWithName:AR_ENTRY_CONTROLLER functionName:"SwitchScene" message:sceneName.UTF8String];
+    [[self ufw] sendMessageToGOWithName:SHARED_SCENE_MANAGER functionName:"SwitchScene" message:sceneName.UTF8String];
 }
 
 - (void)useMantisVisionModel:(NSString *)modelPath
@@ -355,6 +359,19 @@ UnityFramework *LoadUnityFramework() {
     _ufw = nil;
     _quitted = YES;
 //    [self showHostMainWindow:@""];
+}
+
+
+#pragma mark System Scene Event
+- (void)unitySystemEntrySceneDidLoad
+{
+//    NSLog(@"************ unitySystemEntrySceneDidLoad ************");
+}
+
+- (void)unitySystemExitSceneDidLoad
+{
+//    NSLog(@"************ unitySystemExitSceneDidLoad ************");
+    [self unloadUnity];
 }
 
 + (NSString *)DictionaryToJson:(NSDictionary *)dict

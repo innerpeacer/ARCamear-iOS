@@ -45,12 +45,14 @@
     [WTUnityCallbackUtils registerApiForModelHandlingCallbacks:self];
 }
 
+- (void)unityDidLoadEntryScene
+{
+    [[WTUnitySDK sharedSDK] switchToScene:@"ARCameraScene"];
+}
+
 - (void)unityDidLoadScene:(NSString *)sceneName
 {
     NSLog(@"======== Did Load Scene: %@", sceneName);
-    if ([sceneName isEqualToString:@"AREntryScene"]) {
-        [[WTUnitySDK sharedSDK] switchToScene:@"ARCameraScene"];
-    }
     if ([sceneName isEqualToString:@"ARCameraScene"]) {
         [[WTUnitySDK sharedSDK] setShootingParams:WTShooting_SD];
     }

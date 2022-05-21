@@ -39,6 +39,10 @@
     
     [WTUnityCallbackUtils registerApiForSceneControllerCallbacks:self];
     [WTUnityCallbackUtils registerApiForModelHandlingCallbacks:self];
+}
+
+- (void)unityDidLoadEntryScene
+{
     [[WTUnitySDK sharedSDK] switchToScene:@"ARPreviewScene"];
 }
 
