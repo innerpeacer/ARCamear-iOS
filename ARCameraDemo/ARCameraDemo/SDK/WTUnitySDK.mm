@@ -54,6 +54,7 @@ UnityFramework *LoadUnityFramework() {
 
 @implementation WTUnitySDK
 
+#define AR_ENTRY_CONTROLLER "AREntrySceneController"
 #define AR_CAMERA_CONTROLLER "ARCameraSceneController"
 #define AR_PREVIEW_CONTROLLER "ARPreviewSceneController"
 
@@ -195,7 +196,7 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)switchToScene:(NSString *)sceneName
 {
-    [[self ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"SwitchScene" message:sceneName.UTF8String];
+    [[self ufw] sendMessageToGOWithName:AR_ENTRY_CONTROLLER functionName:"SwitchScene" message:sceneName.UTF8String];
 }
 
 - (void)useMantisVisionModel:(NSString *)modelPath

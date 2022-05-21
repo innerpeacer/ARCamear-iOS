@@ -44,7 +44,7 @@
 
 - (void)unityDidLoadScene:(NSString *)sceneName
 {
-//    NSLog(@"======== Did Load Scene: %@", sceneName);
+    NSLog(@"======== Did Load Scene: %@", sceneName);
     if ([sceneName isEqualToString:@"ARPreviewScene"]) {
 //        [[WTUnitySDK sharedSDK] setPreviewBackgroundColorWithRed:1.0 Blue:0.0 Green:0.5 Alpha:1.0f];
 //        [[WTUnitySDK sharedSDK] setPreviewCamareRectWithX:0.0 Y:0.1 Width:1 Height:0.8];
@@ -54,7 +54,7 @@
 
 - (void)unityDidUnloadScene:(NSString *)sceneName
 {
-//    NSLog(@"======== Did UnLoad Scene: %@", sceneName);
+    NSLog(@"======== Did UnLoad Scene: %@", sceneName);
 }
 
 - (void)showNativeWindow

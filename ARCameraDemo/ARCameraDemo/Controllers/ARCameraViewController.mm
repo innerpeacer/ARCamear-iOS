@@ -12,7 +12,7 @@
 #import "MockingFileHelper.h"
 
 
-@interface ARCameraViewController() <WTUnityOverlayViewDelegate, WTUnityShootingCallbackProtocol, WTModelHandlingCallbackProtocol>
+@interface ARCameraViewController() <WTUnityOverlayViewDelegate, WTUnityShootingCallbackProtocol, WTModelHandlingCallbackProtocol, WTUnitySceneControllerCallbackProtocol>
 {
     NSString *selectedObjectID;
 }
@@ -40,9 +40,20 @@
     
     NSLog(@"ARCameraViewController.viewDidLoad");
     
+    [WTUnityCallbackUtils registerApiForSceneControllerCallbacks:self];
     [WTUnityCallbackUtils registerApiForShootingCallbacks:self];
     [WTUnityCallbackUtils registerApiForModelHandlingCallbacks:self];
-    [[WTUnitySDK sharedSDK] setShootingParams:WTShooting_SD];
+}
+
+- (void)unityDidLoadScene:(NSString *)sceneName
+{
+    NSLog(@"======== Did Load Scene: %@", sceneName);
+    if ([sceneName isEqualToString:@"AREntryScene"]) {
+        [[WTUnitySDK sharedSDK] switchToScene:@"ARCameraScene"];
+    }
+    if ([sceneName isEqualToString:@"ARCameraScene"]) {
+        [[WTUnitySDK sharedSDK] setShootingParams:WTShooting_SD];
+    }
 }
 
 - (void)awakeFromNib
