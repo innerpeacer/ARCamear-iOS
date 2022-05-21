@@ -6,13 +6,10 @@
 //
 
 #import "ARCameraViewController.h"
-#import <UnityFramework/WTNativeCallUnityProxy.h>
-#import <UnityFramework/WTUnityCallNativeProxy.h>
-#import "WTUnitySDK.h"
 #import "MockingFileHelper.h"
 
 
-@interface ARCameraViewController() <WTUnityOverlayViewDelegate, WTUnityShootingCallbackProtocol, WTModelHandlingCallbackProtocol, WTUnitySceneControllerCallbackProtocol>
+@interface ARCameraViewController()
 {
     NSString *selectedObjectID;
 }
@@ -37,12 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSLog(@"ARCameraViewController.viewDidLoad");
-    
-    [WTUnityCallbackUtils registerApiForSceneControllerCallbacks:self];
-    [WTUnityCallbackUtils registerApiForShootingCallbacks:self];
-    [WTUnityCallbackUtils registerApiForModelHandlingCallbacks:self];
 }
 
 - (void)unityDidLoadEntryScene

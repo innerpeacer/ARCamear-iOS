@@ -6,10 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UnityFramework/WTNativeCallUnityProxy.h>
+#import <UnityFramework/WTUnityCallNativeProxy.h>
+#import "WTUnitySDK.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ARPreviewViewController : UIViewController
+@interface ARPreviewViewController : UIViewController <WTUnityOverlayViewDelegate, WTUnitySceneControllerCallbackProtocol, WTModelHandlingCallbackProtocol>
 
 @end
 

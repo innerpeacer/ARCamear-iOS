@@ -41,6 +41,9 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     ARCameraViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"arCameraController"];
+    [WTUnityCallbackUtils registerApiForSceneControllerCallbacks:controller];
+    [WTUnityCallbackUtils registerApiForShootingCallbacks:controller];
+    [WTUnityCallbackUtils registerApiForModelHandlingCallbacks:controller];
 //    [self.navigationController pushViewController:controller animated:YES];
     [[WTUnitySDK sharedSDK] showUnityWindowFrom:self withController:controller];
 }
@@ -48,6 +51,8 @@
 - (void)btnARPreviewClicked:(id)sender
 {
     ARPreviewViewController *controller = [[ARPreviewViewController alloc] init];
+    [WTUnityCallbackUtils registerApiForSceneControllerCallbacks:controller];
+    [WTUnityCallbackUtils registerApiForModelHandlingCallbacks:controller];
     [[WTUnitySDK sharedSDK] showUnityWindowFrom:self withController:controller];
 }
 

@@ -36,9 +36,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [WTUnityCallbackUtils registerApiForSceneControllerCallbacks:self];
-    [WTUnityCallbackUtils registerApiForModelHandlingCallbacks:self];
 }
 
 - (void)unityDidLoadEntryScene
