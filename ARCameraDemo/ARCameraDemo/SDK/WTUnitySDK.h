@@ -32,6 +32,7 @@ typedef enum _WTShootingParams {
 } WTShootingParams;
 
 typedef enum _WTModelType {
+    WTModel_Unknown = 0,
     WTModel_Common3D = 1,
     WTModel_MantisVisionHD = 2,
 //    WTModel_MantisVisionSD = 3,

@@ -12,7 +12,7 @@
 #import "WTUnitySDK.h"
 #import "MockingFileHelper.h"
 
-@interface ARPreviewViewController () <WTUnityOverlayViewDelegate, WTUnitySceneControllerCallbackProtocol>
+@interface ARPreviewViewController () <WTUnityOverlayViewDelegate, WTUnitySceneControllerCallbackProtocol, WTModelHandlingCallbackProtocol>
 
 @property(nonatomic, strong) WTUnityContainerView *containerView;
 
@@ -38,6 +38,7 @@
     [super viewDidLoad];
     
     [WTUnityCallbackUtils registerApiForSceneControllerCallbacks:self];
+    [WTUnityCallbackUtils registerApiForModelHandlingCallbacks:self];
     [[WTUnitySDK sharedSDK] switchToScene:@"ARPreviewScene"];
 }
 
@@ -138,6 +139,16 @@
     NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
     [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
 
+}
+
+- (void)unityDidFinishLoadingModel:(int)modelType withPath:(NSString *)path
+{
+    NSLog(@"Did Load Model: %@", path);
+}
+
+- (void)unityDidFailedLoadingModel:(int)modelType withPath:(NSString *)path description:(NSString *)description
+{
+    NSLog(@"Failed Load Model: %@", description);
 }
 
 @end
