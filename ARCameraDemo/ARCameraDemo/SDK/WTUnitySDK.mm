@@ -279,19 +279,19 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetPreviewRect" message:params.UTF8String];
 }
 
-- (void)setPreviewCameraDistance:(float)d
-{
-    if (d <= 0) {
-        return;
-    }
-    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetPreviewCameraDistance" message:[NSString stringWithFormat:@"%f", -d].UTF8String];
-}
+//- (void)setPreviewCameraDistance:(float)d
+//{
+//    if (d <= 0) {
+//        return;
+//    }
+//    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetPreviewCameraDistance" message:[NSString stringWithFormat:@"%f", -d].UTF8String];
+//}
 
-- (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax
-{
-    NSString *params = [WTUnitySDK DictionaryToJson:@{@"xMin": @(xMin), @"xMax": @(xMax), @"yMin": @(yMin), @"yMax": @(yMax), @"zMin": @(zMin), @"zMax": @(zMax)}];
-    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetCameraField" message:params.UTF8String];
-}
+//- (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax
+//{
+//    NSString *params = [WTUnitySDK DictionaryToJson:@{@"xMin": @(xMin), @"xMax": @(xMax), @"yMin": @(yMin), @"yMax": @(yMax), @"zMin": @(zMin), @"zMax": @(zMax)}];
+//    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetCameraField" message:params.UTF8String];
+//}
 
 
 - (void)setPreviewBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha

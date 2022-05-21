@@ -73,7 +73,7 @@ typedef enum _WTModelType {
 - (void)loadModelInfo:(NSString *)modelInfoPath;
 - (void)setPreviewCamareRectWithX:(float)x Y:(float)y Width:(float)width Height:(float)height;
 //- (void)setPreviewCameraDistance:(float)d;
-- (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax;
+//- (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax;
 - (void)setPreviewBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha;
 
 @end

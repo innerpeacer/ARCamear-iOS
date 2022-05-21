@@ -12,6 +12,11 @@
         "zMin": 0,
         "zMax": 1.705
     },
+    "previewAngle": {
+        "pitch": 20,
+        "minPitch": -90,
+        "maxPitch": 90
+    },
     "previewCameraField": {
         "xMin": -0.614,
         "xMax": 0.614,
