@@ -171,6 +171,9 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)showNativeWindow
 {
+    if ([_ufw isPaused]) {
+        [_ufw pause:NO];
+    }
     [self switchToScene:@"ARExitScene"];
     if (self.nativeUIController) {
         if (self.nativeUIController.navigationController) {

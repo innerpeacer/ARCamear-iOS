@@ -23,4 +23,16 @@
     return YES;
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    if ([[WTUnitySDK sharedSDK] isUnityInitialized]) {
+        [[WTUnitySDK ufw] pause:YES];
+    }
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    if ([[WTUnitySDK sharedSDK] isUnityInitialized]) {
+        [[WTUnitySDK ufw] pause:NO];
+    }
+}
+
 @end

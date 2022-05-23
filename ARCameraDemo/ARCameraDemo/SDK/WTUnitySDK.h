@@ -50,6 +50,7 @@ typedef enum _WTModelType {
 -(void)runInMainWithArgc:(int)argc argv:(char **)argv;
 - (void)setLaunchOptions:(NSDictionary *)opts;
 - (void)setMainWindow:(UIWindow *)window;
+- (BOOL)isUnityInitialized;
 
 #pragma Operation Methods
 - (void)showNativeWindow;

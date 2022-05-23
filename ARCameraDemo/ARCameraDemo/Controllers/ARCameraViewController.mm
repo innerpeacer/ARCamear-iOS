@@ -59,6 +59,10 @@
 {
     float width = self.modelView.frame.size.width;
     
+    UIButton *button = [self createButtonWithTitle:@"Return To Native" Color:[UIColor greenColor] Action:@selector(backButtonClicked:)];
+    button.center = CGPointMake(100, 100);
+    [self.containerView addSubview:button];
+    
 //    self.modelView.hidden = YES;
     self.shootingView.hidden = YES;
     
