@@ -387,6 +387,10 @@ UnityFramework *LoadUnityFramework() {
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
+    if (self.userInteractionEnabled == NO || self.hidden == YES || self.alpha == 0.01) {
+        return nil;
+    }
+    
     if ([self pointInside:point withEvent:event]) {
         for (UIView *subview in self.subviews.reverseObjectEnumerator) {
             CGPoint pointInSubview = [subview convertPoint:point fromView:self];
