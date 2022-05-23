@@ -38,13 +38,13 @@
 
 - (void)unityDidLoadEntryScene
 {
-    [[WTUnitySDK sharedSDK] switchToScene:@"ARCameraScene"];
+    [[WTUnitySDK sharedSDK] switchToScene:[WTUnitySDK cameraScene]];
 }
 
 - (void)unityDidLoadScene:(NSString *)sceneName
 {
     NSLog(@"======== Did Load Scene: %@", sceneName);
-    if ([sceneName isEqualToString:@"ARCameraScene"]) {
+    if ([sceneName isEqualToString:[WTUnitySDK cameraScene]]) {
         [[WTUnitySDK sharedSDK] setShootingParams:WTShooting_SD];
     }
 }

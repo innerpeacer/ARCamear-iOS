@@ -55,6 +55,9 @@ UnityFramework *LoadUnityFramework() {
 
 @implementation WTUnitySDK
 
+#define AR_SCENE_CAMERA @"ARCameraScene"
+#define AR_SCENE_PREVIEW @"ARPreviewScene"
+
 #define SHARED_SCENE_MANAGER "SharedSceneManager"
 #define AR_ENTRY_CONTROLLER "AREntrySceneController"
 #define AR_CAMERA_CONTROLLER "ARCameraSceneController"
@@ -85,6 +88,16 @@ UnityFramework *LoadUnityFramework() {
 + (UnityFramework *)ufw
 {
     return [WTUnitySDK sharedSDK].ufw;
+}
+
++ (NSString *)cameraScene
+{
+    return AR_SCENE_CAMERA;
+}
+
++ (NSString *)previewScene
+{
+    return AR_SCENE_PREVIEW;
 }
 
 - (BOOL)isUnityInitialized

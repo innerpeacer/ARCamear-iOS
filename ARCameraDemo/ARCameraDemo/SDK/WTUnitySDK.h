@@ -43,6 +43,9 @@ typedef enum _WTModelType {
 + (WTUnitySDK *)sharedSDK;
 + (UnityFramework *)ufw;
 
++ (NSString *)cameraScene;
++ (NSString *)previewScene;
+
 #pragma Config Methods
 -(void)runInMainWithArgc:(int)argc argv:(char **)argv;
 - (void)setLaunchOptions:(NSDictionary *)opts;
