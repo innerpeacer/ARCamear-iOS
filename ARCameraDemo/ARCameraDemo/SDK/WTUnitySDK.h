@@ -80,4 +80,11 @@ typedef enum _WTModelType {
 //- (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax;
 - (void)setPreviewBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha;
 
+#pragma Application LifeCycle
+- (void)applicationWillResignActive:(UIApplication *)application;
+- (void)applicationDidEnterBackground:(UIApplication *)application;
+- (void)applicationWillEnterForeground:(UIApplication *)application;
+- (void)applicationDidBecomeActive:(UIApplication *)application;
+- (void)applicationWillTerminate:(UIApplication *)application;
+
 @end

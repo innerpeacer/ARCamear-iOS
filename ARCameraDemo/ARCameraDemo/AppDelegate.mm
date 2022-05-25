@@ -24,15 +24,26 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    if ([[WTUnitySDK sharedSDK] isUnityInitialized]) {
-        [[WTUnitySDK ufw] pause:YES];
-    }
+    [[WTUnitySDK sharedSDK] applicationDidEnterBackground:application];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    if ([[WTUnitySDK sharedSDK] isUnityInitialized]) {
-        [[WTUnitySDK ufw] pause:NO];
-    }
+    [[WTUnitySDK sharedSDK] applicationWillEnterForeground:application];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    [[WTUnitySDK sharedSDK] applicationWillResignActive:application];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [[WTUnitySDK sharedSDK] applicationDidBecomeActive:application];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    [[WTUnitySDK sharedSDK] applicationWillTerminate:application];
 }
 
 @end
