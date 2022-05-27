@@ -63,6 +63,7 @@ typedef enum _WTModelType {
 - (void)useCommon3DModel:(NSString *)modelPath;
 - (void)useCommon3DModelAsync:(NSString *)modelPath;
 - (void)removeModelObject:(NSString *)objectID;
+- (void)setEditModeWaitingInterval:(float)timeInterval;
 
 #pragma Shooting
 - (void)setShootingParams:(WTShootingParams)params;

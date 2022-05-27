@@ -239,6 +239,11 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"RemovePlacedModelObject" message:objectID.UTF8String];
 }
 
+- (void)setEditModeWaitingInterval:(float)timeInterval
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"SetEditModeWaitingInterval" message:[NSString stringWithFormat:@"%f", timeInterval].UTF8String];
+}
+
 - (void)setShootingParams:(WTShootingParams)params
 {
     double photoSuperSize = 1;

@@ -46,6 +46,7 @@
     NSLog(@"======== Did Load Scene: %@", sceneName);
     if ([sceneName isEqualToString:[WTUnitySDK cameraScene]]) {
         [[WTUnitySDK sharedSDK] setShootingParams:WTShooting_SD];
+        [[WTUnitySDK sharedSDK] setEditModeWaitingInterval:5.0f];
     }
 }
 
