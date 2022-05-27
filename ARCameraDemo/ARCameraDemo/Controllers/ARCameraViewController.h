@@ -6,7 +6,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <UnityFramework/WTNativeCallUnityProxy.h>
 #import <UnityFramework/WTUnityCallNativeProxy.h>
 #import "WTUnitySDK.h"
 

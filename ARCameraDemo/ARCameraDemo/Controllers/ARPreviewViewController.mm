@@ -7,7 +7,6 @@
 
 #import "ARPreviewViewController.h"
 #import "AppDelegate.h"
-#import <UnityFramework/WTNativeCallUnityProxy.h>
 #import <UnityFramework/WTUnityCallNativeProxy.h>
 #import "WTUnitySDK.h"
 #import "MockingFileHelper.h"

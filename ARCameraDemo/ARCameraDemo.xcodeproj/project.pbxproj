@@ -16,7 +16,7 @@
 		578D276327F14E1500B57BB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 578D276127F14E1500B57BB8 /* LaunchScreen.storyboard */; };
 		578D279A27F16A4500B57BB8 /* UnityFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 578D279827F16A4500B57BB8 /* UnityFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		578D279E27F1944800B57BB8 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 578D279D27F1944800B57BB8 /* MainViewController.mm */; };
-		578D27A227F1997000B57BB8 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 578D27A127F1997000B57BB8 /* MenuViewController.m */; };
+		578D27A227F1997000B57BB8 /* MenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 578D27A127F1997000B57BB8 /* MenuViewController.mm */; };
 		578D27A527F1B39E00B57BB8 /* TestUnityViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 578D27A427F1B39E00B57BB8 /* TestUnityViewController.mm */; };
 		578D27AF27F1CEE700B57BB8 /* SuperNetwork_mvp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 578D27AB27F1CEC600B57BB8 /* SuperNetwork_mvp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		578D27B127F1CEE800B57BB8 /* MVZMQNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 578D27AA27F1CEC600B57BB8 /* MVZMQNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -68,7 +68,7 @@
 		578D279827F16A4500B57BB8 /* UnityFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UnityFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		578D279D27F1944800B57BB8 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		578D27A027F1997000B57BB8 /* MenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		578D27A127F1997000B57BB8 /* MenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		578D27A127F1997000B57BB8 /* MenuViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MenuViewController.mm; sourceTree = "<group>"; };
 		578D27A327F1B39E00B57BB8 /* TestUnityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestUnityViewController.h; sourceTree = "<group>"; };
 		578D27A427F1B39E00B57BB8 /* TestUnityViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TestUnityViewController.mm; sourceTree = "<group>"; };
 		578D27A627F1CEAD00B57BB8 /* MVX2File_mvp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MVX2File_mvp.framework; path = ../../../UnityProjects/ARCamera/Builds/iOS/Frameworks/Plugins/Mvx2/plugins/ios/MVX2File_mvp.framework; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				578D27A027F1997000B57BB8 /* MenuViewController.h */,
-				578D27A127F1997000B57BB8 /* MenuViewController.m */,
+				578D27A127F1997000B57BB8 /* MenuViewController.mm */,
 				578D27A327F1B39E00B57BB8 /* TestUnityViewController.h */,
 				578D27A427F1B39E00B57BB8 /* TestUnityViewController.mm */,
 				578903C027FAE11500B96731 /* ARCameraViewController.h */,
@@ -283,7 +283,7 @@
 				57FABAA627F6CB4500A40F9B /* MockingFileHelper.m in Sources */,
 				57F4CBEA280FF2B6008EF605 /* ARPreviewViewController.mm in Sources */,
 				57342C5C27F4618E00EBFFD9 /* WTUnitySDK.mm in Sources */,
-				578D27A227F1997000B57BB8 /* MenuViewController.m in Sources */,
+				578D27A227F1997000B57BB8 /* MenuViewController.mm in Sources */,
 				57FABAA227F6CAF500A40F9B /* HelperMD5.cpp in Sources */,
 				578D27A527F1B39E00B57BB8 /* TestUnityViewController.mm in Sources */,
 			);

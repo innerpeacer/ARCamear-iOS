@@ -7,7 +7,6 @@
 
 #import "TestUnityViewController.h"
 #import "AppDelegate.h"
-#import <UnityFramework/WTNativeCallUnityProxy.h>
 #import <UnityFramework/WTUnityCallNativeProxy.h>
 #import "WTUnitySDK.h"
 #import "MockingFileHelper.h"
@@ -151,7 +150,6 @@
 - (void)callUnityApi
 {
     NSLog(@"callUnityApi");
-    [WTNativeCallUnityProxy testChangeCubeScaleWithXY:arc4random()%2 Z:arc4random()%2];
 }
 
 - (void)unityDidChangeCubeColor:(NSString *)color
