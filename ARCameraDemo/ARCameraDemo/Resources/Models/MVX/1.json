@@ -14,8 +14,8 @@
     },
     "previewAngle": {
         "pitch": 20,
-        "minPitch": -90,
-        "maxPitch": 90
+        "minPitch": -20,
+        "maxPitch": 30
     },
     "previewCameraField": {
         "xMin": -0.614,
