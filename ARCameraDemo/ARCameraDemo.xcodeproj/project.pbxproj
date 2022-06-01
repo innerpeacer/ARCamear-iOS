@@ -26,6 +26,7 @@
 		578D27BF27F1CF4800B57BB8 /* Mvx2BasicIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 578D27B627F1CF1B00B57BB8 /* Mvx2BasicIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		578F5AFA2840C88C001DD269 /* Frame3DViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 578F5AF92840C88C001DD269 /* Frame3DViewController.mm */; };
 		57A2A21B28453BC8000C6DEB /* ARReferenceImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57A2A21A28453BC8000C6DEB /* ARReferenceImages.xcassets */; };
+		57CAD2B128470360001E8BC5 /* UniversalTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 57CAD2B028470360001E8BC5 /* UniversalTestViewController.mm */; };
 		57F4CBEA280FF2B6008EF605 /* ARPreviewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 57F4CBE9280FF2B6008EF605 /* ARPreviewViewController.mm */; };
 		57FABAA227F6CAF500A40F9B /* HelperMD5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FABA9F27F6CAF500A40F9B /* HelperMD5.cpp */; };
 		57FABAA327F6CAF500A40F9B /* HelperMD5Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 57FABAA027F6CAF500A40F9B /* HelperMD5Utils.mm */; };
@@ -82,6 +83,8 @@
 		578F5AF82840C88C001DD269 /* Frame3DViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Frame3DViewController.h; sourceTree = "<group>"; };
 		578F5AF92840C88C001DD269 /* Frame3DViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Frame3DViewController.mm; sourceTree = "<group>"; };
 		57A2A21A28453BC8000C6DEB /* ARReferenceImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = ARReferenceImages.xcassets; path = "../../../../UnityProjects/ARCamera/Builds/iOS/Unity-iPhone/ARReferenceImages.xcassets"; sourceTree = "<group>"; };
+		57CAD2AF28470360001E8BC5 /* UniversalTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UniversalTestViewController.h; sourceTree = "<group>"; };
+		57CAD2B028470360001E8BC5 /* UniversalTestViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UniversalTestViewController.mm; sourceTree = "<group>"; };
 		57F4CBE8280FF2B6008EF605 /* ARPreviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARPreviewViewController.h; sourceTree = "<group>"; };
 		57F4CBE9280FF2B6008EF605 /* ARPreviewViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ARPreviewViewController.mm; sourceTree = "<group>"; };
 		57FABA9B27F6CA7C00A40F9B /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Models; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 				57F4CBE9280FF2B6008EF605 /* ARPreviewViewController.mm */,
 				578F5AF82840C88C001DD269 /* Frame3DViewController.h */,
 				578F5AF92840C88C001DD269 /* Frame3DViewController.mm */,
+				57CAD2AF28470360001E8BC5 /* UniversalTestViewController.h */,
+				57CAD2B028470360001E8BC5 /* UniversalTestViewController.mm */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 			files = (
 				578F5AFA2840C88C001DD269 /* Frame3DViewController.mm in Sources */,
 				578903C227FAE11500B96731 /* ARCameraViewController.mm in Sources */,
+				57CAD2B128470360001E8BC5 /* UniversalTestViewController.mm in Sources */,
 				57FABAA327F6CAF500A40F9B /* HelperMD5Utils.mm in Sources */,
 				578D275527F14E1300B57BB8 /* AppDelegate.mm in Sources */,
 				578D279E27F1944800B57BB8 /* MainViewController.mm in Sources */,

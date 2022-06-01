@@ -10,6 +10,7 @@
 #import "ARCameraViewController.h"
 #import "ARPreviewViewController.h"
 #import "Frame3DViewController.h"
+#import "UniversalTestViewController.h"
 #import "AppDelegate.h"
 #import "WTUnitySDK.h"
 #import <UnityFramework/WTUnityCallNativeProxy.h>
@@ -65,6 +66,14 @@
     [[WTUnitySDK sharedSDK] showUnityWindowFrom:self withController:controller];
 }
 
+- (void)btnUniversalTestClicked:(id)sender
+{
+    UniversalTestViewController *controller = [[UniversalTestViewController alloc] init];
+    [WTUnityCallbackUtils registerApiForSceneControllerCallbacks:controller];
+    [[WTUnitySDK sharedSDK] showUnityWindowFrom:self withController:controller];
+}
+
+
 - (void)unityDidReturnToNativeWindow:(UIViewController *)fromController
 {
     NSLog(@"Unity Return to Main");
@@ -83,30 +92,35 @@
 - (void)initButtons {
     {
         UIButton *button = [self createButtonWithTitle:@"AppTest" Color:[UIColor greenColor] Action:@selector(btnAppTestClicked:)];
-        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 150);
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 200);
         [self.view addSubview:button];
         self.appTestButton = button;
     }
     
     {
         UIButton *button = [self createButtonWithTitle:@"AR Camera" Color:[UIColor greenColor] Action:@selector(btnARCameraClicked:)];
-        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 50);
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 - 100);
         [self.view addSubview:button];
         self.arCameraButton = button;
     }
     
     {
         UIButton *button = [self createButtonWithTitle:@"AR Preview" Color:[UIColor greenColor] Action:@selector(btnARPreviewClicked:)];
-        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 + 50);
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
         [self.view addSubview:button];
         self.arPreviewButton = button;
     }
     
     {
         UIButton *button = [self createButtonWithTitle:@"Frame3D" Color:[UIColor greenColor] Action:@selector(btnARFrame3DClicked:)];
-        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 + 150);
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 + 100);
         [self.view addSubview:button];
-        self.arPreviewButton = button;
+    }
+    
+    {
+        UIButton *button = [self createButtonWithTitle:@"Universal Test" Color:[UIColor greenColor] Action:@selector(btnUniversalTestClicked:)];
+        button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2 + 200);
+        [self.view addSubview:button];
     }
 }
 
