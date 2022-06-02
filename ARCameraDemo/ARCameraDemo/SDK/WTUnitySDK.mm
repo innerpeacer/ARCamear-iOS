@@ -9,12 +9,14 @@
 #import <UnityFramework/WTUnitySystemEventProxy.h>
 
 void ShowAlert(NSString *title, NSString *msg) {
+#if  DEBUG
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:defaultAction];
 
     auto delegate = [[UIApplication sharedApplication] delegate];
     [delegate.window.rootViewController presentViewController:alert animated:YES completion:nil];
+#endif
 }
 
 UnityFramework *LoadUnityFramework() {
