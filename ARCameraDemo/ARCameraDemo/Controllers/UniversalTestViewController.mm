@@ -6,6 +6,7 @@
 //
 
 #import "UniversalTestViewController.h"
+#import "MockingFileHelper.h"
 
 @interface UniversalTestViewController ()
 {
@@ -25,7 +26,7 @@
 {
     if (self = [super init]) {
         [self initButtons];
-        scene = @"VideoTextureTest";
+        scene = @"RandomAccessPreviewScene";
     }
     return self;
 }
@@ -39,7 +40,7 @@
 {
     NSLog(@"======== Did Load Scene: %@", sceneName);
     if ([sceneName isEqualToString:scene]) {
-        
+        [self unityTest];
     }
 }
 
@@ -52,6 +53,13 @@
 - (void)unityTest
 {
     NSLog(@"unityTest");
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
+    NSString *modelName = @"1";
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"modelPath": modelPath, @"modelInfoPath": modelInfoPath} options:kNilOptions error:nil];
+    NSString *params = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"RandomAccessPreviewSceneController" functionName:"PreviewModel" message:params.UTF8String];
 }
 
 - (UIView *)viewToOverlayInUnity
