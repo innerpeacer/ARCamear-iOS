@@ -325,6 +325,19 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetBackgroundColor" message:params.UTF8String];
 }
 
+- (void)setPreviewMvxFrameParamsWithTargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    if (targetFPS) {
+        dict[@"targetFPS"]= targetFPS;
+    }
+    if (skipFrame) {
+        dict[@"skipFrame"]= skipFrame;
+    }
+    NSString *params = [WTUnitySDK DictionaryToJson:dict];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"setMvxFrameParams" message:params.UTF8String];
+}
+
 - (void)unloadUnity
 {
     if (![self isUnityInitialized]) {

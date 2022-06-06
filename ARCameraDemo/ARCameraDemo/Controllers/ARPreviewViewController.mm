@@ -48,6 +48,7 @@
     if ([sceneName isEqualToString:[WTUnitySDK previewScene]]) {
 //        [[WTUnitySDK sharedSDK] setPreviewBackgroundColorWithRed:1.0 Blue:0.0 Green:0.5 Alpha:1.0f];
 //        [[WTUnitySDK sharedSDK] setPreviewCamareRectWithX:0.0 Y:0.1 Width:1 Height:0.8];
+        [[WTUnitySDK sharedSDK] setPreviewMvxFrameParamsWithTargetFPS:@24 skipFrame:@2];
         [self previewModel1];
     }
 }
@@ -104,18 +105,28 @@
     }
     
     {
-        UIButton *button = [self createButtonWithTitle:@"Preview 1" Color:[UIColor blueColor] Action:@selector(previewModel1)];
+        UIButton *button = [self createButtonWithTitle:@"Preview 1" Color:[UIColor blueColor] Action:@selector(btnPreview1Clicked:)];
         button.center = CGPointMake(300, 100);
         [self.containerView addSubview:button];
         self.previewButton1 = button;
     }
     
     {
-        UIButton *button = [self createButtonWithTitle:@"Preview 2" Color:[UIColor blueColor] Action:@selector(previewModel2)];
+        UIButton *button = [self createButtonWithTitle:@"Preview 2" Color:[UIColor blueColor] Action:@selector(btnPreview2Clicked:)];
         button.center = CGPointMake(300, 200);
         [self.containerView addSubview:button];
         self.previewButton2 = button;
     }
+}
+
+- (void)btnPreview1Clicked:(id)sender
+{
+    [self previewModel1];
+}
+
+- (void)btnPreview2Clicked:(id)sender
+{
+    [self previewModel2];
 }
 
 - (void)previewModel1
