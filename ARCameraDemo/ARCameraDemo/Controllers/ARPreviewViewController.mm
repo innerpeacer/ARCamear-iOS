@@ -126,7 +126,16 @@
 
 - (void)btnPreview2Clicked:(id)sender
 {
-    [self previewModel2];
+    int random = arc4random() % 2;
+    if (random == 0) {
+        [self previewModel2];
+    } else {
+        NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
+        NSString *modelName = @"2";
+        NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
+        NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+        [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
+    }
 }
 
 - (void)previewModel1

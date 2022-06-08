@@ -122,15 +122,25 @@
         NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
         [[WTUnitySDK sharedSDK] useMantisVisionModel:modelPath];
     } else if (sender == self.modelButton) {
-        NSLog(@"Use Model");
-        NSString *dir = [MockingFileHelper modelRootDirectory];
-        NSString *modelName = @"Flamingo.glb";
-//        modelName = @"bad.txt";
-        NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-//        [[WTUnitySDK sharedSDK] useCommon3DModel:modelPath];
-        [[WTUnitySDK sharedSDK] useCommon3DModelAsync:modelPath];
+        int random = arc4random() % 2;
+        if (random == 0) {
+            NSLog(@"Use Model");
+            NSString *dir = [MockingFileHelper modelRootDirectory];
+            NSString *modelName = @"Flamingo.glb";
+    //        modelName = @"bad.txt";
+            NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
+    //        [[WTUnitySDK sharedSDK] useCommon3DModel:modelPath];
+            [[WTUnitySDK sharedSDK] useCommon3DModelAsync:modelPath];
+        } else {
+            NSLog(@"Use Mvx");
+            NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
+            NSString *modelName = @"2.mvx";
+    //        modelName = @"bad.txt";
+            NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
+            [[WTUnitySDK sharedSDK] useMantisVisionModel:modelPath];
+        }
     }
-    [self switchView];
+//    [self switchView];
 }
 
 - (void)switchView
