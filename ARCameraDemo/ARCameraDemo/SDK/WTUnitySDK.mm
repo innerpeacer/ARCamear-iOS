@@ -325,7 +325,7 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetBackgroundColor" message:params.UTF8String];
 }
 
-- (void)setPreviewMvxFrameParamsWithTargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame
+- (void)setMvxFrameParamsWithScene:(const char*)sceneName TargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     if (targetFPS) {
@@ -335,7 +335,17 @@ UnityFramework *LoadUnityFramework() {
         dict[@"skipFrame"]= skipFrame;
     }
     NSString *params = [WTUnitySDK DictionaryToJson:dict];
-    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"setMvxFrameParams" message:params.UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:sceneName functionName:"SetMvxFrameParams" message:params.UTF8String];
+}
+
+- (void)setPreviewMvxFrameParamsWithTargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame
+{
+    [self setMvxFrameParamsWithScene:AR_PREVIEW_CONTROLLER TargetFPS:targetFPS skipFrame:skipFrame];
+}
+
+- (void)setCameraMvxFrameParamsWithTargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame
+{
+    [self setMvxFrameParamsWithScene:AR_CAMERA_CONTROLLER TargetFPS:targetFPS skipFrame:skipFrame];
 }
 
 - (void)unloadUnity

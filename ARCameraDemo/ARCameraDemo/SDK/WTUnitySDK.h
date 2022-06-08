@@ -57,6 +57,8 @@ typedef enum _WTModelType {
 - (void)showUnityWindowFrom:(UIViewController *)fromController withController:(UIViewController *)uiController;
 - (void)switchToScene:(NSString *)sceneName;
 
+#pragma Camera
+- (void)setCameraMvxFrameParamsWithTargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame;
 
 #pragma Model Handling
 - (void)useMantisVisionModel:(NSString *)modelPath;
