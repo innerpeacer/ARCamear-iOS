@@ -45,6 +45,7 @@ typedef enum _WTModelType {
 
 + (NSString *)cameraScene;
 + (NSString *)previewScene;
++ (NSString *)virtualWorldScene;
 
 #pragma Config Methods
 -(void)runInMainWithArgc:(int)argc argv:(char **)argv;
@@ -83,6 +84,12 @@ typedef enum _WTModelType {
 //- (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax;
 - (void)setPreviewBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha;
 - (void)setPreviewMvxFrameParamsWithTargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame;
+
+#pragma VirtualWorldDemo
+- (void)virtualWorldLoadModelWithPath:(NSString *)modelPath;
+- (void)virtualWorldTakePhoto:(NSString *)pID;
+- (void)virtualWorldStartRecordingVideo:(NSString *)vID;
+- (void)virtualWorldStopRecordingVideo;
 
 #pragma Application LifeCycle
 - (void)applicationWillResignActive:(UIApplication *)application;

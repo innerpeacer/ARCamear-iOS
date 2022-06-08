@@ -26,7 +26,7 @@
 {
     if (self = [super init]) {
         [self initButtons];
-        scene = @"RandomAccessPreviewScene";
+        scene = [WTUnitySDK virtualWorldScene];
     }
     return self;
 }
@@ -48,6 +48,13 @@
 {
     NSLog(@"showNativeWindow");
     [[WTUnitySDK sharedSDK] showNativeWindow];
+//    [[WTUnitySDK sharedSDK] virtualWorldStopRecordingVideo];
+}
+
+- (void)testButtonClicked:(id)sender
+{
+    [[WTUnitySDK sharedSDK] virtualWorldTakePhoto:@"1"];
+//    [[WTUnitySDK sharedSDK] virtualWorldStartRecordingVideo:@"1"];
 }
 
 - (void)unityTest
@@ -56,10 +63,7 @@
     NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
     NSString *modelName = @"1";
     NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
-    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
-    NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"modelPath": modelPath, @"modelInfoPath": modelInfoPath} options:kNilOptions error:nil];
-    NSString *params = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"RandomAccessPreviewSceneController" functionName:"PreviewModel" message:params.UTF8String];
+    [[WTUnitySDK sharedSDK] virtualWorldLoadModelWithPath:modelPath];
 }
 
 - (UIView *)viewToOverlayInUnity
@@ -89,7 +93,7 @@
     }
 
     {
-        UIButton *button = [self createButtonWithTitle:@"Unity Test" Color:[UIColor blueColor] Action:@selector(unityTest)];
+        UIButton *button = [self createButtonWithTitle:@"Unity Test" Color:[UIColor blueColor] Action:@selector(testButtonClicked:)];
         button.center = CGPointMake(300, 100);
         [self.containerView addSubview:button];
         self.universalTestButton = button;

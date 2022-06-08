@@ -59,11 +59,14 @@ UnityFramework *LoadUnityFramework() {
 
 #define AR_SCENE_CAMERA @"ARCameraScene"
 #define AR_SCENE_PREVIEW @"ARPreviewScene"
+#define AR_SCENE_VIRTUAL_WORLD @"VirtualWorldDemo"
 
 #define SHARED_SCENE_MANAGER "SharedSceneManager"
 #define AR_ENTRY_CONTROLLER "AREntrySceneController"
 #define AR_CAMERA_CONTROLLER "ARCameraSceneController"
 #define AR_PREVIEW_CONTROLLER "ARPreviewSceneController"
+
+#define AR_VIRTUAL_WORLD_CONTROLLER "VirtualWorldController"
 
 - (id)init {
     self = [super init];
@@ -100,6 +103,11 @@ UnityFramework *LoadUnityFramework() {
 + (NSString *)previewScene
 {
     return AR_SCENE_PREVIEW;
+}
+
++ (NSString *)virtualWorldScene
+{
+    return AR_SCENE_VIRTUAL_WORLD;
 }
 
 - (BOOL)isUnityInitialized
@@ -347,6 +355,29 @@ UnityFramework *LoadUnityFramework() {
 {
     [self setMvxFrameParamsWithScene:AR_CAMERA_CONTROLLER TargetFPS:targetFPS skipFrame:skipFrame];
 }
+
+#pragma VirtualWorldDemo
+- (void)virtualWorldLoadModelWithPath:(NSString *)modelPath
+{
+    NSString *params = modelPath;
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"LoadMvxModel" message:params.UTF8String];
+}
+
+- (void)virtualWorldTakePhoto:(NSString *)pID
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"TakePhoto" message:pID.UTF8String];
+}
+
+- (void)virtualWorldStartRecordingVideo:(NSString *)vID
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"StartRecordingVideo" message:vID.UTF8String];
+}
+
+- (void)virtualWorldStopRecordingVideo
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"StopRecordingVideo" message:""];
+}
+
 
 - (void)unloadUnity
 {
