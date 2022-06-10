@@ -11,6 +11,7 @@
 @interface UniversalTestViewController ()
 {
     NSString *scene;
+    bool isMoving;
 }
 
 @property(nonatomic, strong) WTUnityContainerView *containerView;
@@ -53,7 +54,13 @@
 
 - (void)testButtonClicked:(id)sender
 {
-    [[WTUnitySDK sharedSDK] virtualWorldTakePhoto:@"1"];
+    if (isMoving) {
+        [[WTUnitySDK sharedSDK] virtaulWorldStopMoving];
+    } else {
+        [[WTUnitySDK sharedSDK] virtaulWorldStartMoving:WTMovingDirection_Forward];
+    }
+    isMoving = !isMoving;
+//    [[WTUnitySDK sharedSDK] virtualWorldTakePhoto:@"1"];
 //    [[WTUnitySDK sharedSDK] virtualWorldStartRecordingVideo:@"1"];
 }
 

@@ -38,6 +38,13 @@ typedef enum _WTModelType {
 //    WTModel_MantisVisionSD = 3,
 } WTModelType;
 
+typedef enum _WTMovingDirection {
+    WTMovingDirection_Forward = 1,
+    WTMovingDirection_Right = 2,
+    WTMovingDirection_Backward = 3,
+    WTMovingDirection_Left = 4,
+} WTMovingDirection;
+
 @interface WTUnitySDK : NSObject
 
 + (WTUnitySDK *)sharedSDK;
@@ -87,6 +94,10 @@ typedef enum _WTModelType {
 
 #pragma VirtualWorldDemo
 - (void)virtualWorldLoadModelWithPath:(NSString *)modelPath;
+- (void)virtualWorldSetModelPositionWithX:(float)x Y:(float)y Z:(float)z;
+- (void)virtualWorldSetMovingSpeed:(float)speed;
+- (void)virtaulWorldStartMoving:(WTMovingDirection)direction;
+- (void)virtaulWorldStopMoving;
 - (void)virtualWorldTakePhoto:(NSString *)pID;
 - (void)virtualWorldStartRecordingVideo:(NSString *)vID;
 - (void)virtualWorldStopRecordingVideo;

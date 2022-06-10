@@ -363,6 +363,29 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"LoadMvxModel" message:params.UTF8String];
 }
 
+- (void)virtualWorldSetModelPositionWithX:(float)x Y:(float)y Z:(float)z
+{
+    NSString *params = [WTUnitySDK DictionaryToJson:@{@"x": @(x), @"y": @(y), @"z": @(z)}];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"SetMvxModelPosition" message:params.UTF8String];
+}
+
+- (void)virtualWorldSetMovingSpeed:(float)speed
+{
+    NSString *params = [NSString stringWithFormat:@"%f", speed];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"SetMovingSpeed" message:params.UTF8String];
+}
+
+- (void)virtaulWorldStartMoving:(WTMovingDirection)direction
+{
+    NSString *params = [NSString stringWithFormat:@"%d", direction];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"StartMoving" message:params.UTF8String];
+}
+
+- (void)virtaulWorldStopMoving
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"StopMoving" message:""];
+}
+
 - (void)virtualWorldTakePhoto:(NSString *)pID
 {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_VIRTUAL_WORLD_CONTROLLER functionName:"TakePhoto" message:pID.UTF8String];
