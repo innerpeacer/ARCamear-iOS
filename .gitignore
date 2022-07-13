@@ -70,3 +70,5 @@ iOSInjectionProject/
 
 .idea/
 *.mvx
+
+**/Resources/Models/
