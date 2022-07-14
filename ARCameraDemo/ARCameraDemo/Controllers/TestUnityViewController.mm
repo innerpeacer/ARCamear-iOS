@@ -37,7 +37,7 @@
     [super viewDidLoad];
     
     [NSClassFromString(@"WTUnityCallbackUtils") registerApiForTestingCallbacks:self];
-    [[WTUnitySDK sharedSDK] switchToScene:@"AppTest"];
+    [[WTUnitySDK sharedSDK] switchToScene:@"AssetBundleTest"];
 }
 
 - (void)showNativeWindow
@@ -125,15 +125,11 @@
 - (void)sendUnityLoadModel
 {
     NSLog(@"sendUnityLoadModel");
-    NSString *dir = [MockingFileHelper modelRootDirectory];
-    
-    NSArray *models = @[@"Parrot", @"Flamingo", @"Soldier", @"Xbot", @"Horse", @"Stork"];
-    int randomIndex = arc4random() % [models count];
-//    randomIndex = 2;
-    NSString *modelName = [NSString stringWithFormat:@"%@.glb", models[randomIndex]];
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"AssetBundles"];;
+    NSString *modelName = [NSString stringWithFormat:@"%@.ab", @"girl.ios"];
     
     NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-    [[WTUnitySDK ufw] sendMessageToGOWithName:"AppTest" functionName:"AddGltfModel" message:modelPath.UTF8String];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:"AssetBundleController" functionName:"LoadAssetBundle" message:modelPath.UTF8String];
 }
 
 - (void)sendUnityLoadMvxModel
