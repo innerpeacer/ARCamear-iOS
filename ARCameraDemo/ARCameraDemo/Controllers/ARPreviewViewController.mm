@@ -130,35 +130,45 @@
     if (random == 0) {
         [self previewModel2];
     } else {
-        NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
-        NSString *modelName = @"2";
-        NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
-        NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
-        [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
+        [self previewWABModel:@"girl"];
     }
 }
 
 - (void)previewModel1
 {
-    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
     NSString *modelName = @"1";
-    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
-    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
-    [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
-
+    [self preivewMVXModel:modelName];
 }
 
 - (void)previewModel2
 {
-    NSString *dir = [MockingFileHelper modelRootDirectory];
     NSString *modelName = @"Flamingo";
-//    modelName = @"AlloyArmor";
-//    modelName = @"Spirit";
-//    modelName = @"PSuit";
+    //    modelName = @"AlloyArmor";
+    [self previewGLBModel:modelName];
+}
+
+- (void)preivewMVXModel:(NSString *)modelName
+{
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
+}
+
+- (void)previewGLBModel:(NSString *)modelName
+{
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"GLB"];
     NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.glb", modelName]];
     NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
     [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
+}
 
+- (void)previewWABModel:(NSString *)modelName
+{
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"WAB"];
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.wab", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
 }
 
 - (void)unityDidFinishLoadingModel:(int)modelType withPath:(NSString *)path
