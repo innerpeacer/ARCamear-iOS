@@ -181,12 +181,17 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)showNativeWindow
 {
+    [self showNativeWindow:YES];
+}
+
+- (void)showNativeWindow:(BOOL)anmiated
+{
     [self switchToScene:@"ARExitScene"];
     if (self.nativeUIController) {
         if (self.nativeUIController.navigationController) {
-            [self.nativeUIController.navigationController popViewControllerAnimated:YES];
+            [self.nativeUIController.navigationController popViewControllerAnimated:anmiated];
         } else {
-            [self.nativeUIController dismissModalViewControllerAnimated:YES];
+            [self.nativeUIController dismissModalViewControllerAnimated:anmiated];
         }
         self.nativeUIController = nil;
     }
@@ -205,14 +210,19 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)showUnityWindowFrom:(UIViewController<WTUnityViewControllerDelegate> *)fromController withController:(UIViewController<WTUnityOverlayViewDelegate> *)uiController
 {
+    [self showUnityWindowFrom:fromController withController:uiController animated:YES];
+}
+
+- (void)showUnityWindowFrom:(UIViewController<WTUnityViewControllerDelegate> *)fromController withController:(UIViewController<WTUnityOverlayViewDelegate> *)uiController animated:(BOOL)animated
+{
     NSLog(@"[WTUnitySDK].showUnityWindow");
     self.fromController = fromController;
     self.nativeUIController = uiController;
     [self initUnity];
     if (self.fromController.navigationController) {
-        [self.fromController.navigationController pushViewController:self.nativeUIController animated:YES];
+        [self.fromController.navigationController pushViewController:self.nativeUIController animated:animated];
     } else {
-        [self.fromController presentModalViewController:self.nativeUIController animated:YES];
+        [self.fromController presentModalViewController:self.nativeUIController animated:animated];
     }
     
     auto view = [[[WTUnitySDK ufw] appController] rootView];

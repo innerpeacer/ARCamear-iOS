@@ -62,7 +62,9 @@ typedef enum _WTMovingDirection {
 
 #pragma Operation Methods
 - (void)showNativeWindow;
+- (void)showNativeWindow:(BOOL)anmiated;
 - (void)showUnityWindowFrom:(UIViewController *)fromController withController:(UIViewController *)uiController;
+- (void)showUnityWindowFrom:(UIViewController *)fromController withController:(UIViewController *)uiController animated:(BOOL)animated;
 - (void)switchToScene:(NSString *)sceneName;
 
 #pragma Camera
