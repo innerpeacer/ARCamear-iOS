@@ -236,19 +236,16 @@ UnityFramework *LoadUnityFramework() {
     [[self ufw] sendMessageToGOWithName:SHARED_SCENE_MANAGER functionName:"SwitchScene" message:sceneName.UTF8String];
 }
 
-- (void)useMantisVisionModel:(NSString *)modelPath
+- (void)useModelWithPath:(NSString *)modelPath InfoPath:(NSString *)modelInfoPath
 {
-    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"UseMvx" message:modelPath.UTF8String];
+    NSString *params = [WTUnitySDK DictionaryToJson:@{@"modelPath": modelPath, @"modelInfoPath": modelInfoPath}];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"UseModel" message:params.UTF8String];
 }
 
-- (void)useCommon3DModel:(NSString *)modelPath
+- (void)useModelAsyncWithPath:(NSString *)modelPath InfoPath:(NSString *)modelInfoPath
 {
-    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"UseModel" message:modelPath.UTF8String];
-}
-
-- (void)useCommon3DModelAsync:(NSString *)modelPath
-{
-    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"UseModelAsync" message:modelPath.UTF8String];
+    NSString *params = [WTUnitySDK DictionaryToJson:@{@"modelPath": modelPath, @"modelInfoPath": modelInfoPath}];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"UseModelAsync" message:params.UTF8String];
 }
 
 - (void)removeModelObject:(NSString *)objectID
@@ -321,21 +318,6 @@ UnityFramework *LoadUnityFramework() {
     NSString *params = [WTUnitySDK DictionaryToJson:@{@"x": @(x), @"y": @(y), @"width": @(width), @"height": @(height)}];
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetPreviewRect" message:params.UTF8String];
 }
-
-//- (void)setPreviewCameraDistance:(float)d
-//{
-//    if (d <= 0) {
-//        return;
-//    }
-//    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetPreviewCameraDistance" message:[NSString stringWithFormat:@"%f", -d].UTF8String];
-//}
-
-//- (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax
-//{
-//    NSString *params = [WTUnitySDK DictionaryToJson:@{@"xMin": @(xMin), @"xMax": @(xMax), @"yMin": @(yMin), @"yMax": @(yMax), @"zMin": @(zMin), @"zMax": @(zMax)}];
-//    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetCameraField" message:params.UTF8String];
-//}
-
 
 - (void)setPreviewBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha
 {

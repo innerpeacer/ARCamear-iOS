@@ -71,9 +71,8 @@ typedef enum _WTMovingDirection {
 - (void)setCameraMvxFrameParamsWithTargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame;
 
 #pragma Model Handling
-- (void)useMantisVisionModel:(NSString *)modelPath;
-- (void)useCommon3DModel:(NSString *)modelPath;
-- (void)useCommon3DModelAsync:(NSString *)modelPath;
+- (void)useModelWithPath:(NSString *)modelPath InfoPath:(NSString *)modelInfoPath;
+- (void)useModelAsyncWithPath:(NSString *)modelPath InfoPath:(NSString *)modelInfoPath;
 - (void)removeModelObject:(NSString *)objectID;
 - (void)setEditModeWaitingInterval:(float)timeInterval;
 

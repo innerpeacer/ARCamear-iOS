@@ -115,32 +115,58 @@
 {
     NSLog(@"modelSelected");
     if (sender == self.mvxButton) {
-        NSLog(@"Use Mvx");
-        NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
-        NSString *modelName = @"1.mvx";
-//        modelName = @"bad.txt";
-        NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-        [[WTUnitySDK sharedSDK] useMantisVisionModel:modelPath];
+//        [self useMvxModel:@"1" async:NO];
+        [self useMvxModel:@"1" async:YES];
     } else if (sender == self.modelButton) {
-        int random = arc4random() % 2;
-        if (random == 0) {
-            NSLog(@"Use Model");
-            NSString *dir = [MockingFileHelper modelRootDirectory];
-            NSString *modelName = @"Flamingo.glb";
-    //        modelName = @"bad.txt";
-            NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-    //        [[WTUnitySDK sharedSDK] useCommon3DModel:modelPath];
-            [[WTUnitySDK sharedSDK] useCommon3DModelAsync:modelPath];
-        } else {
-            NSLog(@"Use Mvx");
-            NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
-            NSString *modelName = @"2.mvx";
-    //        modelName = @"bad.txt";
-            NSString *modelPath = [dir stringByAppendingPathComponent:modelName];
-            [[WTUnitySDK sharedSDK] useMantisVisionModel:modelPath];
-        }
+        NSString *modelName = @"Flamingo";
+        [self useGlbModel:modelName async:YES];
+//        int random = arc4random() % 2;
+//        if (random == 0) {
+//            [self useGlbModel:modelName async:YES];
+//        } else {
+//            [self useMvxModel:@"2" async:NO];
+//        }
     }
     [self switchView];
+}
+
+- (void)useWabModel:(NSString *)modelName async:(BOOL)async
+{
+    NSLog(@"Use Wab");
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"WAB"];
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.wab", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    if (async) {
+        [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
+    } else {
+        [[WTUnitySDK sharedSDK] useModelWithPath:modelPath InfoPath:modelInfoPath];
+    }
+}
+
+- (void)useMvxModel:(NSString *)modelName async:(BOOL)async
+{
+    NSLog(@"Use Mvx");
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    if (async) {
+        [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
+    } else {
+        [[WTUnitySDK sharedSDK] useModelWithPath:modelPath InfoPath:modelInfoPath];
+    }
+}
+
+- (void)useGlbModel:(NSString *)modelName async:(BOOL)async
+{
+    NSLog(@"Use Glb");
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"GLB"];
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.glb", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    if (async) {
+        [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
+    } else {
+        [[WTUnitySDK sharedSDK] useModelWithPath:modelPath InfoPath:modelInfoPath];
+    }
 }
 
 - (void)switchView
