@@ -261,6 +261,13 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"SetEditModeWaitingInterval" message:[NSString stringWithFormat:@"%f", timeInterval].UTF8String];
 }
 
+- (void)playCameraAnimation:(NSString *)clipName
+{
+    if (clipName) {
+        [[WTUnitySDK ufw] sendMessageToGOWithName:AR_CAMERA_CONTROLLER functionName:"PlayAnimation" message:clipName.UTF8String];
+    }
+}
+
 - (void)setShootingParams:(WTShootingParams)params
 {
     double photoSuperSize = 1;
@@ -346,6 +353,11 @@ UnityFramework *LoadUnityFramework() {
 - (void)setCameraMvxFrameParamsWithTargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame
 {
     [self setMvxFrameParamsWithScene:AR_CAMERA_CONTROLLER TargetFPS:targetFPS skipFrame:skipFrame];
+}
+
+- (void)playPreviewAnimation:(NSString *)clipName
+{
+    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"PlayAnimation" message:clipName.UTF8String];
 }
 
 #pragma VirtualWorldDemo

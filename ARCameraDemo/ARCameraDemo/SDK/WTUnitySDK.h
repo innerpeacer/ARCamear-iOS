@@ -36,6 +36,7 @@ typedef enum _WTModelType {
     WTModel_Common3D = 1,
     WTModel_MantisVisionHD = 2,
 //    WTModel_MantisVisionSD = 3,
+    WTModel_AssetBundles = 4,
 } WTModelType;
 
 typedef enum _WTMovingDirection {
@@ -75,6 +76,7 @@ typedef enum _WTMovingDirection {
 - (void)useModelAsyncWithPath:(NSString *)modelPath InfoPath:(NSString *)modelInfoPath;
 - (void)removeModelObject:(NSString *)objectID;
 - (void)setEditModeWaitingInterval:(float)timeInterval;
+- (void)playCameraAnimation:(NSString *)clipName;
 
 #pragma Shooting
 - (void)setShootingParams:(WTShootingParams)params;
@@ -86,12 +88,13 @@ typedef enum _WTMovingDirection {
 - (void)previewMantisVisionModel:(NSString *)modelPath;
 - (void)previewCommon3DModel:(NSString *)modelPath;
 - (void)previewModelWithPath:(NSString *)modelPath InfoPath:(NSString *)modelInfoPath;
-- (void)loadModelInfo:(NSString *)modelInfoPath;
+//- (void)loadModelInfo:(NSString *)modelInfoPath;
 - (void)setPreviewCamareRectWithX:(float)x Y:(float)y Width:(float)width Height:(float)height;
 //- (void)setPreviewCameraDistance:(float)d;
 //- (void)setPreviewCameraFieldWithXmin:(float)xMin XMax:(float)xMax YMin:(float)yMin YMax:(float)yMax ZMin:(float)zMin ZMax:(float)zMax;
 - (void)setPreviewBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha;
 - (void)setPreviewMvxFrameParamsWithTargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame;
+- (void)playPreviewAnimation:(NSString *)clipName;
 
 #pragma VirtualWorldDemo
 - (void)virtualWorldLoadModelWithPath:(NSString *)modelPath;

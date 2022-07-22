@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		57342C5C27F4618E00EBFFD9 /* WTUnitySDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 57342C5B27F4618E00EBFFD9 /* WTUnitySDK.mm */; };
 		57342C5F27F47A5000EBFFD9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57342C5E27F47A5000EBFFD9 /* main.m */; };
+		574EBAAD288A7FD900C929C9 /* WTModelInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 574EBAAC288A7FD900C929C9 /* WTModelInfo.m */; };
 		578903C227FAE11500B96731 /* ARCameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 578903C127FAE11500B96731 /* ARCameraViewController.mm */; };
 		578D275527F14E1300B57BB8 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 578D275427F14E1300B57BB8 /* AppDelegate.mm */; };
 		578D275E27F14E1300B57BB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 578D275C27F14E1300B57BB8 /* Main.storyboard */; };
@@ -59,6 +60,8 @@
 		57342C5B27F4618E00EBFFD9 /* WTUnitySDK.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WTUnitySDK.mm; sourceTree = "<group>"; };
 		57342C5D27F463DA00EBFFD9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		57342C5E27F47A5000EBFFD9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		574EBAAB288A7FD900C929C9 /* WTModelInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTModelInfo.h; sourceTree = "<group>"; };
+		574EBAAC288A7FD900C929C9 /* WTModelInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTModelInfo.m; sourceTree = "<group>"; };
 		578903C027FAE11500B96731 /* ARCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARCameraViewController.h; sourceTree = "<group>"; };
 		578903C127FAE11500B96731 /* ARCameraViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ARCameraViewController.mm; sourceTree = "<group>"; };
 		578D275027F14E1300B57BB8 /* ARCameraDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARCameraDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +115,8 @@
 			children = (
 				57342C5A27F4618E00EBFFD9 /* WTUnitySDK.h */,
 				57342C5B27F4618E00EBFFD9 /* WTUnitySDK.mm */,
+				574EBAAB288A7FD900C929C9 /* WTModelInfo.h */,
+				574EBAAC288A7FD900C929C9 /* WTModelInfo.m */,
 			);
 			path = SDK;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 			files = (
 				578F5AFA2840C88C001DD269 /* Frame3DViewController.mm in Sources */,
 				578903C227FAE11500B96731 /* ARCameraViewController.mm in Sources */,
+				574EBAAD288A7FD900C929C9 /* WTModelInfo.m in Sources */,
 				57CAD2B128470360001E8BC5 /* UniversalTestViewController.mm in Sources */,
 				57FABAA327F6CAF500A40F9B /* HelperMD5Utils.mm in Sources */,
 				578D275527F14E1300B57BB8 /* AppDelegate.mm in Sources */,

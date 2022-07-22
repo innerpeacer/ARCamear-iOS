@@ -7,11 +7,13 @@
 
 #import "ARCameraViewController.h"
 #import "MockingFileHelper.h"
-
+#import "WTModelInfo.h"
 
 @interface ARCameraViewController()
 {
     NSString *selectedObjectID;
+    WTModelInfo *currentModelInfo;
+    int testAnimationIndex;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -64,6 +66,12 @@
     button.center = CGPointMake(100, 100);
     [self.containerView addSubview:button];
     
+    {
+        UIButton *button = [self createButtonWithTitle:@"Play Animation" Color:[UIColor greenColor] Action:@selector(playAnimation:)];
+        button.center = CGPointMake(width - 100, 100);
+        [self.containerView addSubview:button];
+    }
+    
 //    self.modelView.hidden = YES;
     self.shootingView.hidden = YES;
     
@@ -106,6 +114,19 @@
     return self.containerView;
 }
 
+- (IBAction)playAnimation:(id)sender
+{
+    if (currentModelInfo == nil) {
+        return;
+    }
+    
+    if (testAnimationIndex >= currentModelInfo.animation.clips.count) {
+        testAnimationIndex = 0;
+    }
+    WTAnimatinoClip *clip = currentModelInfo.animation.clips[testAnimationIndex++];
+    [[WTUnitySDK sharedSDK] playCameraAnimation:clip.clipName];
+}
+
 - (void)showRemoveButton:(BOOL)show
 {
     self.removeButton.hidden = !show;
@@ -118,13 +139,12 @@
 //        [self useMvxModel:@"1" async:NO];
         [self useMvxModel:@"1" async:YES];
     } else if (sender == self.modelButton) {
-        NSString *modelName = @"Flamingo";
-        [self useGlbModel:modelName async:YES];
+        [self useWabModel:@"techgirl" async:YES];
 //        int random = arc4random() % 2;
 //        if (random == 0) {
-//            [self useGlbModel:modelName async:YES];
+//            [self useGlbModel:@"Flamingo" async:NO];
 //        } else {
-//            [self useMvxModel:@"2" async:NO];
+//            [self useWabModel:@"techgirl" async:YES];
 //        }
     }
     [self switchView];
@@ -136,6 +156,7 @@
     NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"WAB"];
     NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.wab", modelName]];
     NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    currentModelInfo = [WTModelInfo modelInfoFromFile:modelInfoPath];
     if (async) {
         [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
     } else {
@@ -149,6 +170,7 @@
     NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
     NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
     NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    currentModelInfo = [WTModelInfo modelInfoFromFile:modelInfoPath];
     if (async) {
         [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
     } else {
@@ -162,6 +184,7 @@
     NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"GLB"];
     NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.glb", modelName]];
     NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    currentModelInfo = [WTModelInfo modelInfoFromFile:modelInfoPath];
     if (async) {
         [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
     } else {
