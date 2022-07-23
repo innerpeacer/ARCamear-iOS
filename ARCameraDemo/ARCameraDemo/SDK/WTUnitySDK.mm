@@ -357,7 +357,9 @@ UnityFramework *LoadUnityFramework() {
 
 - (void)playPreviewAnimation:(NSString *)clipName
 {
-    [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"PlayAnimation" message:clipName.UTF8String];
+    if (clipName) {
+        [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"PlayAnimation" message:clipName.UTF8String];
+    }
 }
 
 #pragma VirtualWorldDemo

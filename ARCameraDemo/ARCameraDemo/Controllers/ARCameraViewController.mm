@@ -156,7 +156,6 @@
     NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"WAB"];
     NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.wab", modelName]];
     NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
-    currentModelInfo = [WTModelInfo modelInfoFromFile:modelInfoPath];
     if (async) {
         [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
     } else {
@@ -170,7 +169,6 @@
     NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"MVX"];
     NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mvx", modelName]];
     NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
-    currentModelInfo = [WTModelInfo modelInfoFromFile:modelInfoPath];
     if (async) {
         [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
     } else {
@@ -184,7 +182,6 @@
     NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"GLB"];
     NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.glb", modelName]];
     NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
-    currentModelInfo = [WTModelInfo modelInfoFromFile:modelInfoPath];
     if (async) {
         [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
     } else {
@@ -278,12 +275,13 @@
 }
 
 #pragma Model Handling Callback
-- (void)unityDidFinishLoadingModel:(int)modelType withPath:(NSString *)path
+- (void)unityDidFinishLoadingModel:(int)modelType withPath:(NSString *)path infoPath:(NSString *)infoPath
 {
     NSLog(@"Did Load Model: %@", path);
+    currentModelInfo = [WTModelInfo modelInfoFromFile:infoPath];
 }
 
-- (void)unityDidFailedLoadingModel:(int)modelType withPath:(NSString *)path description:(NSString *)description
+- (void)unityDidFailedLoadingModel:(int)modelType withPath:(NSString *)path infoPath:(NSString *)infoPath description:(NSString *)description
 {
     NSLog(@"Failed Load Model: %@", description);
 }

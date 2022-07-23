@@ -9,10 +9,15 @@
 #import "AppDelegate.h"
 #import <UnityFramework/WTUnityCallNativeProxy.h>
 #import "WTUnitySDK.h"
+#import "WTModelInfo.h"
 #import "MockingFileHelper.h"
 
 @interface ARPreviewViewController () <WTUnityOverlayViewDelegate, WTUnitySceneControllerCallbackProtocol, WTModelHandlingCallbackProtocol>
 
+{
+    WTModelInfo *currentModelInfo;
+    int testAnimationIndex;
+}
 @property(nonatomic, strong) WTUnityContainerView *containerView;
 
 @property(nonatomic, strong) UIButton *returnToNativeButton;
@@ -89,6 +94,12 @@
         [self.containerView addSubview:button];
         self.returnToNativeButton = button;
     }
+    
+    {
+        UIButton *button = [self createButtonWithTitle:@"Play Animation" Color:[UIColor greenColor] Action:@selector(playAnimation:)];
+        button.center = CGPointMake(300, 300);
+        [self.containerView addSubview:button];
+    }
 
     {
 //        UIButton *button = [self createButtonWithTitle:@"Send Unity Message" Color:[UIColor yellowColor] Action:@selector(sendUnityMessage)];
@@ -130,7 +141,7 @@
     if (random == 0) {
         [self previewModel2];
     } else {
-        [self previewWABModel:@"girl"];
+        [self previewWABModel:@"techgirl"];
     }
 }
 
@@ -171,12 +182,28 @@
     [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
 }
 
-- (void)unityDidFinishLoadingModel:(int)modelType withPath:(NSString *)path
+- (IBAction)playAnimation:(id)sender
 {
-    NSLog(@"Did Load Model: %@", path);
+    NSLog(@"======== PlayAnimation");
+    if (currentModelInfo == nil) {
+        return;
+    }
+    
+    if (testAnimationIndex >= currentModelInfo.animation.clips.count) {
+        testAnimationIndex = 0;
+    }
+
+    WTAnimatinoClip *clip = currentModelInfo.animation.clips[testAnimationIndex++];
+    [[WTUnitySDK sharedSDK] playPreviewAnimation:clip.clipName];
 }
 
-- (void)unityDidFailedLoadingModel:(int)modelType withPath:(NSString *)path description:(NSString *)description
+- (void)unityDidFinishLoadingModel:(int)modelType withPath:(NSString *)path infoPath:(NSString *)infoPath
+{
+    NSLog(@"Did Load Model: %@", path);
+    currentModelInfo = [WTModelInfo modelInfoFromFile:infoPath];
+}
+
+- (void)unityDidFailedLoadingModel:(int)modelType withPath:(NSString *)path infoPath:(nonnull NSString *)infoPath  description:(NSString *)description
 {
     NSLog(@"Failed Load Model: %@", description);
 }
