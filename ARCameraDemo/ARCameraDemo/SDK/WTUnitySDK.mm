@@ -332,6 +332,13 @@ UnityFramework *LoadUnityFramework() {
     [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetBackgroundColor" message:params.UTF8String];
 }
 
+- (void)setPreviewBackgroundImage:(NSString *)path
+{
+    if (path) {
+        [[WTUnitySDK ufw] sendMessageToGOWithName:AR_PREVIEW_CONTROLLER functionName:"SetBackgroundImage" message:path.UTF8String];
+    }
+}
+
 - (void)setMvxFrameParamsWithScene:(const char*)sceneName TargetFPS:(NSNumber *)targetFPS skipFrame:(NSNumber *)skipFrame
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
