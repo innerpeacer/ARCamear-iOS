@@ -44,6 +44,10 @@
 
 - (void)unityDidLoadEntryScene
 {
+//    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"Images"];
+//    NSString *bgPath = [dir stringByAppendingPathComponent:@"bg2.jpg"];
+//    [[WTUnitySDK sharedSDK] setGlobalBackgroundImage:bgPath];
+    [[WTUnitySDK sharedSDK] setGlobalBackgroundColorWithRed:1.0 Blue:0.0 Green:0.5 Alpha:1.0f];
     [[WTUnitySDK sharedSDK] switchToScene:[WTUnitySDK previewScene]];
 }
 

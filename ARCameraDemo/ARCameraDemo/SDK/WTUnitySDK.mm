@@ -62,6 +62,7 @@ UnityFramework *LoadUnityFramework() {
 #define AR_SCENE_VIRTUAL_WORLD @"VirtualWorldDemo"
 
 #define SHARED_SCENE_MANAGER "SharedSceneManager"
+#define SHARED_BACKGROUND_MANAGER "SharedBackgroundManager"
 #define AR_ENTRY_CONTROLLER "AREntrySceneController"
 #define AR_CAMERA_CONTROLLER "ARCameraSceneController"
 #define AR_PREVIEW_CONTROLLER "ARPreviewSceneController"
@@ -228,6 +229,19 @@ UnityFramework *LoadUnityFramework() {
     auto view = [[[WTUnitySDK ufw] appController] rootView];
     if (uiController && [uiController respondsToSelector:@selector(viewToOverlayInUnity)]) {
         [view addSubview:[uiController viewToOverlayInUnity]];
+    }
+}
+
+- (void)setGlobalBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha
+{
+    NSString *params = [WTUnitySDK DictionaryToJson:@{@"r": @(r), @"g": @(g), @"b": @(b), @"a": @(alpha)}];
+    [[WTUnitySDK ufw] sendMessageToGOWithName:SHARED_BACKGROUND_MANAGER functionName:"SetGlobalBackgroundColor" message:params.UTF8String];
+}
+
+- (void)setGlobalBackgroundImage:(NSString *)path
+{
+    if (path) {
+        [[WTUnitySDK ufw] sendMessageToGOWithName:SHARED_BACKGROUND_MANAGER functionName:"SetGlobalBackgroundImage" message:path.UTF8String];
     }
 }
 

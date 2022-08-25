@@ -66,6 +66,8 @@ typedef enum _WTMovingDirection {
 - (void)showNativeWindow:(BOOL)anmiated;
 - (void)showUnityWindowFrom:(UIViewController *)fromController withController:(UIViewController *)uiController;
 - (void)showUnityWindowFrom:(UIViewController *)fromController withController:(UIViewController *)uiController animated:(BOOL)animated;
+- (void)setGlobalBackgroundColorWithRed:(float)r Blue:(float)b Green:(float)g Alpha:(float)alpha;
+- (void)setGlobalBackgroundImage:(NSString *)path;
 - (void)switchToScene:(NSString *)sceneName;
 
 #pragma Camera
