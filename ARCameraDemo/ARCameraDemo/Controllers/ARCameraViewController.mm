@@ -189,6 +189,19 @@
     }
 }
 
+- (void)useFrameWabModel:(NSString *)modelName async:(BOOL)async
+{
+    NSLog(@"Use FrameWab");
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"FrameWAB"];
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.wab", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    if (async) {
+        [[WTUnitySDK sharedSDK] useModelAsyncWithPath:modelPath InfoPath:modelInfoPath];
+    } else {
+        [[WTUnitySDK sharedSDK] useModelWithPath:modelPath InfoPath:modelInfoPath];
+    }
+}
+
 - (void)switchView
 {
     self.modelView.hidden = !self.modelView.hidden;

@@ -37,6 +37,8 @@ typedef enum _WTModelType {
     WTModel_MantisVisionHD = 2,
 //    WTModel_MantisVisionSD = 3,
     WTModel_AssetBundles = 4,
+    WTModel_Frame3D = 5,
+    WTModel_FrameAssetBundles = 6,
 } WTModelType;
 
 typedef enum _WTMovingDirection {

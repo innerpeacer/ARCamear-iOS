@@ -186,6 +186,14 @@
     [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
 }
 
+- (void)previewFrameWABModel:(NSString *)modelName
+{
+    NSString *dir = [[MockingFileHelper modelRootDirectory] stringByAppendingPathComponent:@"FrameWAB"];
+    NSString *modelPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.wab", modelName]];
+    NSString *modelInfoPath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.json", modelName]];
+    [[WTUnitySDK sharedSDK] previewModelWithPath:modelPath InfoPath:modelInfoPath];
+}
+
 - (IBAction)playAnimation:(id)sender
 {
     NSLog(@"======== PlayAnimation");

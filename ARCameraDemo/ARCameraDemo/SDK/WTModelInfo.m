@@ -41,6 +41,10 @@
         type = WTModel_Common3D;
     } else if ([typeStr isEqualToString:@"WAB"]) {
         type = WTModel_AssetBundles;
+    } else if ([typeStr isEqualToString:@"Frame3D"]) {
+        type = WTModel_Frame3D;
+    } else if ([typeStr isEqualToString:@"FrameWAB"]) {
+        type = WTModel_FrameAssetBundles;
     }
     
     NSDictionary *animationDict = dict[@"animations"];
